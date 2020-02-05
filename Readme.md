@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Зобнин](https://up.htmlacademy.ru/react/3/user/799155).
-* Наставник: `Неизвестно`.
+* Наставник: [Николай Загорный](https://up.htmlacademy.ru/react/3/user/452233).
 
 ---
 
