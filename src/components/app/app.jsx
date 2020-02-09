@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 // app.jsx
 import React from 'react';
-import {Main} from '../main/main.jsx';
+import Main from '../main/main.jsx';
 
-export const App = (props) => {
-  const {filmInfo} = props;
+const App = (props) => {
+  const {filmsInfo} = props;
   return <React.Fragment>
     <h1>React Application</h1>
     <Main
-      title={filmInfo.title}
-      genre={filmInfo.genre}
-      releaseDate={filmInfo.releaseDate}
+      filmsInfo={filmsInfo}
     />
   </React.Fragment>;
 };
+
+export default App;
