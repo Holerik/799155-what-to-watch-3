@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {filmsInfo} = props;
+  const {filmsInfo, playButtonClickHandler} = props;
   return <React.Fragment>
     {filmsInfo.map((filmInfo) => (
-      <section key={filmInfo.div} className="movie-card movie-card--full">
+      <section key={filmInfo.id} className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
             <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
@@ -39,7 +39,7 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={playButtonClickHandler} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -109,9 +109,10 @@ Main.propTypes = {
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
         genre: PropTypes.string.isRequired,
-        releaseDate: PropTypes.instanceOf(Date)
+        releaseDate: PropTypes.instanceOf(Date).isRequired
       })
-  )
+  ),
+  playButtonClickHandler: PropTypes.func.isRequired,
 };
 
 export default Main;
