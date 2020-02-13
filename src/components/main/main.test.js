@@ -5,20 +5,18 @@ import Main from './main.jsx';
 
 const filmsInfo = [
   {
-    id: 404,
-    title: `Terminator`,
-    genre: `Fiction`,
-    releaseDate: new Date(`2020-02-09T21:07:32.662Z`),
+    id: 501,
+    title: `Unsane`,
+    preview: `img/unsane.jpg`,
+    description: `A young woman is involuntarily committed to a mental institution, where she is confronted by her greatest fear--but is it real or a product of her delusion?`,
+    genre: `Horror`,
   }
 ];
-
-const playButtonClickHandler = () => {};
 
 it(`<Main /> should render Terminator film card`, () => {
   const tree = renderer
     .create(<Main
       filmsInfo={filmsInfo}
-      playButtonClickHandler={playButtonClickHandler}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

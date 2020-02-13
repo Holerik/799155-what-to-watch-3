@@ -7,10 +7,8 @@ import PropTypes from 'prop-types';
 const App = (props) => {
   const {filmsInfo} = props;
   return <React.Fragment>
-    <h1>React Application</h1>
     <Main
       filmsInfo={filmsInfo}
-      playButtonClickHandler={() => {}}
     />
   </React.Fragment>;
 };
@@ -20,8 +18,9 @@ App.propTypes = {
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-        releaseDate: PropTypes.instanceOf(Date).isRequired
+        preview: PropTypes.string.isRequired,
+        genre: PropTypes.string,
+        description: PropTypes.string,
       })
   )
 };

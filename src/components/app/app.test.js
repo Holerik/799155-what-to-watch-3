@@ -5,10 +5,11 @@ import App from './app.jsx';
 
 const filmsInfo = [
   {
-    id: 44,
-    title: `Fantomas`,
+    id: 33,
+    title: `Overboard`,
+    preview: `img/overboard.jpg`,
+    description: `After a spoiled, wealthy yacht owner is thrown overboard and loses his memory, a mistreated employee convinces him that he is her working-class husband`,
     genre: `Comedy`,
-    releaseDate: new Date(`2020-02-09T21:07:32.696Z`),
   }
 ];
 
