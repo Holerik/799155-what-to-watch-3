@@ -6,18 +6,19 @@ import MovieCard from './moviecard.jsx';
 const filmInfo = {
   id: 201,
   title: `Rampage`,
-  preview: `img/rampage.jpg`,
-  description: `When three different animals become infected with a dangerous pathogen, a primatologist and a geneticist team up to stop them from destroying Chicago`,
-  genre: `Sci-Fi`,
+  poster: `img/rampage.jpg`,
+  altPoster: `rampage poster`,
 };
 
 const movieCardActivateHandler = () => {};
+const movieCardClickHandler = () => {};
 
-it(`<MovieCard /> should render Commuter small card`, () => {
+it(`<MovieCard /> should render Rampage small card`, () => {
   const tree = renderer
     .create(<MovieCard
       movie={filmInfo}
       movieCardActivateHandler={movieCardActivateHandler}
+      movieCardClickHandler={movieCardClickHandler}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

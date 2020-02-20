@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MoveList /> should render small movie cadr list 1`] = `
+<div
+  className="catalog__movies-list"
+>
+  <article
+    className="small-movie-card catalog__movies-card"
+  >
+    <div
+      className="small-movie-card__image"
+      id="91"
+      onClick={[Function]}
+      onMouseOver={[Function]}
+    >
+      <img
+        alt="commuter poster"
+        height="175"
+        src="img/commuter.jpg"
+        width="280"
+      />
+    </div>
+    <h3
+      className="small-movie-card__title"
+      onClick={[Function]}
+    >
+      <a
+        className="small-movie-card__link"
+        href="/moviecard-full"
+      >
+        The Commuter
+      </a>
+    </h3>
+  </article>
+</div>
+`;
