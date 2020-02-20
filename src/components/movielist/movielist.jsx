@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../moviecard/moviecard.jsx';
-// import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
 
 const MOVIE_CARDS_ON_PAGE = 8;
 
