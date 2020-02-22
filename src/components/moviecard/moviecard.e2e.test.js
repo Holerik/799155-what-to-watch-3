@@ -7,9 +7,8 @@ import MovieCard from './moviecard.jsx';
 const filmInfo = {
   id: 101,
   title: `Hostiles`,
-  preview: `img/hostiles.jpg`,
-  description: `In 1892, a legendary Army Captain reluctantly agrees to escort a Cheyenne chief and his family through dangerous territory`,
-  genre: `Western`,
+  poster: `img/hostiles.jpg`,
+  altPoster: `Hostiles poster`,
 };
 
 
@@ -19,14 +18,19 @@ Enzyme.configure({
 
 it(`Should play button be pressed`, () => {
   const movieCardActivateHandler = jest.fn();
+  const movieCardClickHandler = jest.fn();
 
   const main = shallow(
       <MovieCard
         movie={filmInfo}
         movieCardActivateHandler={movieCardActivateHandler}
+        movieCardClickHandler={movieCardClickHandler}
+        key={0}
       />
   );
   const image = main.find(`div.small-movie-card__image`);
   image.props().onMouseOver();
+  image.props().onClick();
   expect(movieCardActivateHandler.mock.calls.length).toBe(1);
+  expect(movieCardClickHandler.mock.calls.length).toBe(1);
 });

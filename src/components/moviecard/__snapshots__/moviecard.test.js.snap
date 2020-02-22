@@ -1,16 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCard /> should render Commuter small card 1`] = `
+exports[`<MovieCard /> should render Rampage small card 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
 >
   <div
     className="small-movie-card__image"
     id="201"
+    onClick={[Function]}
     onMouseOver={[Function]}
   >
     <img
-      alt="When three different animals become infected with a dangerous pathogen, a primatologist and a geneticist team up to stop them from destroying Chicago"
+      alt="rampage poster"
       height="175"
       src="img/rampage.jpg"
       width="280"
@@ -18,10 +19,11 @@ exports[`<MovieCard /> should render Commuter small card 1`] = `
   </div>
   <h3
     className="small-movie-card__title"
+    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/moviecard-full"
     >
       Rampage
     </a>

@@ -4,11 +4,19 @@ import PropTypes from 'prop-types';
 import MovieList from '../movielist/movielist.jsx';
 
 const Main = (props) => {
-  const {filmsInfo} = props;
+  const {filmsInfo, setMovieCardId, promoMovie} = props;
+  const getFullString = (data, delimiter) => {
+    let result = ``;
+    for (let item of data) {
+      result += String.fromCharCode(delimiter) + item;
+    }
+    return result.slice(1);
+  };
+
   return <React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+        <img src={promoMovie.background} alt={promoMovie.altBackground} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -32,14 +40,14 @@ const Main = (props) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+            <img src={promoMovie.poster} alt={promoMovie.altPoster} width="218" height="327" />
           </div>
 
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{promoMovie.title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{getFullString(promoMovie.genre, 183)}</span>
+              <span className="movie-card__year">{promoMovie.year}</span>
             </p>
 
             <div className="movie-card__buttons">
@@ -98,8 +106,25 @@ const Main = (props) => {
       <section className="catalog">
         <MovieList
           filmsInfo={filmsInfo}
+          setMovieCardId={setMovieCardId}
         />
+        <div className="catalog__more">
+          <button className="catalog__button" type="button">Show more</button>
+        </div>
       </section>
+      <footer className="page-footer">
+        <div className="logo">
+          <a className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </a>
+        </div>
+
+        <div className="copyright">
+          <p>© 2019 What to watch Ltd.</p>
+        </div>
+      </footer>
     </div>
   </React.Fragment>;
 };
@@ -109,12 +134,58 @@ Main.propTypes = {
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
-        preview: PropTypes.string.isRequired,
-        genre: PropTypes.string,
-        description: PropTypes.string,
+        poster: PropTypes.string.isRequired,
+        altPoster: PropTypes.string,
       })
   ),
+  setMovieCardId: PropTypes.func.isRequired,
+  filmsFullInfo: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
+        altPoster: PropTypes.String,
+        background: PropTypes.string.isRequired,
+        altBackground: PropTypes.string,
+        description: PropTypes.string.isRequired,
+        review: PropTypes.string.isRequired,
+        genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+        year: PropTypes.number.isRequired,
+        duration: PropTypes.string,
+        age: PropTypes.string,
+        rating: PropTypes.shape({
+          score: PropTypes.string.isRequired,
+          level: PropTypes.string.isRequired,
+          count: PropTypes.number.isRequired,
+        }),
+        director: PropTypes.string.isRequired,
+        starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+      })
+  )
+};
+
+Main.propTypes = {
+  promoMovie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    altPoster: PropTypes.String,
+    background: PropTypes.string.isRequired,
+    altBackground: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    review: PropTypes.string.isRequired,
+    genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+    year: PropTypes.number.isRequired,
+    duration: PropTypes.string,
+    age: PropTypes.string,
+    rating: PropTypes.shape({
+      score: PropTypes.string.isRequired,
+      level: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    }),
+    director: PropTypes.string.isRequired,
+    starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+  })
 };
 
 export default Main;
-

@@ -10,10 +10,11 @@ exports[`<MoveList /> should render small movie cadr list 1`] = `
     <div
       className="small-movie-card__image"
       id="91"
+      onClick={[Function]}
       onMouseOver={[Function]}
     >
       <img
-        alt="An Insurance Salesman/Ex-Cop is caught up in a criminal conspiracy during his daily commute home"
+        alt="commuter poster"
         height="175"
         src="img/commuter.jpg"
         width="280"
@@ -21,10 +22,11 @@ exports[`<MoveList /> should render small movie cadr list 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
+      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
-        href="movie-page.html"
+        href="/moviecard-full"
       >
         The Commuter
       </a>

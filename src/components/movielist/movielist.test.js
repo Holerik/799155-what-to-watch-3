@@ -7,16 +7,18 @@ const filmsInfo = [
   {
     id: 91,
     title: `The Commuter`,
-    preview: `img/commuter.jpg`,
-    description: `An Insurance Salesman/Ex-Cop is caught up in a criminal conspiracy during his daily commute home`,
-    genre: `Thriller`,
+    poster: `img/commuter.jpg`,
+    altPoster: `commuter poster`,
   }
 ];
+
+const setMovieCardId = () => {};
 
 it(`<MoveList /> should render small movie cadr list`, () => {
   const tree = renderer
     .create(<MovieList
       filmsInfo={filmsInfo}
+      setMovieCardId={setMovieCardId}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();
