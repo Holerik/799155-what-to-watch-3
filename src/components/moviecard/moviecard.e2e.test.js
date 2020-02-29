@@ -1,4 +1,4 @@
-// main.e2e.test.js
+// moviecard.e2e.test.js
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -9,6 +9,7 @@ const filmInfo = {
   title: `Hostiles`,
   poster: `img/hostiles.jpg`,
   altPoster: `Hostiles poster`,
+  src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 
@@ -16,15 +17,19 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-it(`Should play button be pressed`, () => {
+it(`Should check card is active`, () => {
   const movieCardActivateHandler = jest.fn();
   const movieCardClickHandler = jest.fn();
+  const movieCardOutHandler = jest.fn();
 
   const main = shallow(
       <MovieCard
         movie={filmInfo}
         movieCardActivateHandler={movieCardActivateHandler}
+        movieCardOutHandler={movieCardOutHandler}
         movieCardClickHandler={movieCardClickHandler}
+        canPlayVideo={false}
+        activeMovieId={0}
         key={0}
       />
   );
@@ -33,4 +38,5 @@ it(`Should play button be pressed`, () => {
   image.props().onClick();
   expect(movieCardActivateHandler.mock.calls.length).toBe(1);
   expect(movieCardClickHandler.mock.calls.length).toBe(1);
+  expect(movieCardOutHandler.mock.calls.length).toBe(0);
 });

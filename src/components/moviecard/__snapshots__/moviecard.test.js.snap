@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCard /> should render Rampage small card 1`] = `
+exports[`<MovieCard /> should render moviee small card 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
 >
@@ -8,6 +8,7 @@ exports[`<MovieCard /> should render Rampage small card 1`] = `
     className="small-movie-card__image"
     id="201"
     onClick={[Function]}
+    onMouseOut={[Function]}
     onMouseOver={[Function]}
   >
     <img

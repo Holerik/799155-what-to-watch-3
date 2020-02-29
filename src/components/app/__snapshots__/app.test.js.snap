@@ -264,6 +264,7 @@ Array [
             className="small-movie-card__image"
             id="33"
             onClick={[Function]}
+            onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <img
