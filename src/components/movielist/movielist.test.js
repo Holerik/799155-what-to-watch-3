@@ -9,6 +9,7 @@ const filmsInfo = [
     title: `The Commuter`,
     poster: `img/commuter.jpg`,
     altPoster: `commuter poster`,
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 

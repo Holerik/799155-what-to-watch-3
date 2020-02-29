@@ -6,54 +6,63 @@ export const filmsInfo = [
     title: `Joker`,
     poster: `img/joker.jpg`,
     altPoster: `Joker poster`,
+    src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
   },
   {
     id: 1,
     title: `The Commuter`,
     poster: `img/commuter.jpg`,
     altPoster: `Commuter poster`,
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 2,
     title: `Molly's Game`,
     poster: `img/mollys-game.jpg`,
     altPoster: `Game poster`,
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 3,
     title: `Maze Runner`,
     poster: `img/maze-runner.jpg`,
     altPoster: `Maze poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 4,
     title: `Braven`,
     poster: `img/braven.jpg`,
     altPoster: `Braven poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 5,
     title: `Peter Rabbit`,
     poster: `img/peter-rabbit.jpg`,
     altPoster: `Rabbit poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 6,
     title: `Journey's End`,
     poster: `img/journeys-end.jpg`,
     altPoster: `Journey poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 7,
     title: `Deadpool 2`,
     poster: `img/deadpool2.jpg`,
     altPoster: `Deadpool poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
   {
     id: 8,
     title: `Cargo`,
     poster: `img/cargo.jpg`,
     altPoster: `Cargo poster`,
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   },
 ];
 
@@ -78,6 +87,7 @@ export const filmsFullInfo = [
     },
     director: `Todd Phillips`,
     starring: [`Joaquin Phoenix`, `Zazie Beetz`, `Robert De Niro`, `Bryan Callen`, `Shea Whigham`, `Frances Conroy`, `Glenn Fleshler`, `Brett Cullen`, `Marc Maron`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 1,
@@ -99,6 +109,7 @@ export const filmsFullInfo = [
     },
     director: `Jaume Collet-Serra`,
     starring: [`Liam Neeson`, `Vera Farmiga`, `Patrick Wilson`, `Jonathan Banks`, `Sam Neill`, `Elizabeth McGovern`, `Killian Scott`, `Shazad Latif`, `Andy Nyman`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 2,
@@ -120,6 +131,7 @@ export const filmsFullInfo = [
     },
     director: `Aaron Sorkin`,
     starring: [`Jessica Chastain`, `Idris Elba`, `Kevin Costner`, `Michael Cera`, `Jeremy Strong`, `Chris O'Dowd`, `J.C. MacKenzie`, `Brian d'Arcy James`, `Bill Camp`, `Graham Greene`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 3,
@@ -141,6 +153,7 @@ export const filmsFullInfo = [
     },
     director: `Wes Ball`,
     starring: [`Dylan O'Brien`, `Aml Ameen`, `Ki Hong Lee`, `Blake Cooper`, `Thomas Brodie-Sangster`, `Will Poulter`, `Dexter Darden`, `Kaya Scodelario`, `Chris Sheffield`, `Joe Adler`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 4,
@@ -162,6 +175,7 @@ export const filmsFullInfo = [
     },
     director: `Lin Oeding`,
     starring: [`Jason Momoa`, `Garret Dillahunt`, `Jill Wagner`, `Stephen Lang`, `Sasha Rossof`, `Sala Baker`, `Fraser Aitcheson`, `Teach Grant`, `Glenn Ennis`, `Todd Scot`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 5,
@@ -183,6 +197,7 @@ export const filmsFullInfo = [
     },
     director: `Will Gluck`,
     starring: [`James Corden`, `Fayssal Bazzi`, `Domhnall Gleeson`, `Sia`, `Colin Moody`, `Sam Neill`, `Margot Robbie`, `Elizabeth Debicki`, `Daisy Ridley`, `Rose Byrne`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 6,
@@ -204,6 +219,7 @@ export const filmsFullInfo = [
     },
     director: `Saul Dibb`,
     starring: [`Paul Bettany`, `Sam Claflin`, `Stephen Graham`, `Andy Gathergood`, `Jack Riddiford`, `Adam Colborne`, `Elliot Balchin`, `Theo Barklem-Biggs`, `Asa Butterfield`, `Nicholas Agnew`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 7,
@@ -225,6 +241,7 @@ export const filmsFullInfo = [
     },
     director: `David Leitch`,
     starring: [`Ryan Reynolds`, `Josh Brolin`, `Morena Baccarin`, `Julian Dennison`, `Zazie Beetz`, `T.J. Miller`, `Leslie Uggams`, `Karan Soni`, `Brianna Hildebrand`, `Jack Kesy`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 8,
@@ -246,6 +263,7 @@ export const filmsFullInfo = [
     },
     director: `Ben Howling`,
     starring: [`Simone Landers`, `Martin Freeman`, `Marlee Jane McPherson-Dobbins`, `Lily Anne McPherson-Dobbins`, `Finlay Sjoberg`, `Finlay Sjoberg`, `Susie Porter`, `Ella Barter`, `Aiden Squire`, `Alexandra Schulze`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
 ];
 
@@ -269,4 +287,5 @@ export const promoMovie = {
   },
   director: `Wes Anderson`,
   starring: [`Ralph Fiennes`, `F. Murray Abraham`, `Mathieu Amalric`, `Adrien Brody`, `SWillem Dafoe`, `Jeff Goldblum`, `	Harvey Keitel`, `Jude Law`, `Bill Murray`],
+  src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };

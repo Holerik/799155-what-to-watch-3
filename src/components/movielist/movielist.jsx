@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MovieCard from '../moviecard/moviecard.jsx';
 
 const MOVIE_CARDS_ON_PAGE = 8;
+const TIME_INTERVAL = 1000; // ms
 
 class MovieList extends React.PureComponent {
   constructor(props) {
@@ -12,12 +13,19 @@ class MovieList extends React.PureComponent {
     this._setMovieCardId = props.setMovieCardId;
     this._movieCardActivateHandler = this._movieCardActivateHandler.bind(this);
     this._movieCardClickHandler = this._movieCardClickHandler.bind(this);
+    this._movieCardOutHandler = this._movieCardOutHandler.bind(this);
     this.state = {
       activeMovieCard: -1,
       showIsDetailed: true,
+      canPlayVideo: false,
     };
     this._movieCardFirstOnPage = 0;
     this._movieCardLastOnPage = this._movieCardFirstOnPage + MOVIE_CARDS_ON_PAGE;
+    this._lastTimeOut = null;
+  }
+
+  _waitTimeInterval() {
+    this.setState({canPlayVideo: true});
   }
 
   _getActiveFilmCard(evt) {
@@ -38,7 +46,21 @@ class MovieList extends React.PureComponent {
 
   _movieCardActivateHandler(evt) {
     const filmCard = this._getActiveFilmCard(evt);
-    this.setState({activeMovieCard: filmCard.id});
+    const id = filmCard === undefined ? -1 : filmCard.id;
+    this.setState({activeMovieCard: id});
+    if (this._lastTimeOut) {
+      clearTimeout(this._lastTimeOut);
+    }
+    this._lastTimeOut = setTimeout(() => {
+      this._waitTimeInterval();
+    }, TIME_INTERVAL);
+  }
+
+  _movieCardOutHandler() {
+    this.setState({activeMovieCard: -1});
+    this.setState({canPlayVideo: false});
+    clearTimeout(this._lastTimeOut);
+    this._lastTimeOut = null;
   }
 
   _movieCardClickHandler(evt) {
@@ -58,7 +80,10 @@ class MovieList extends React.PureComponent {
             <MovieCard
               movie={filmInfo}
               movieCardActivateHandler={this._movieCardActivateHandler}
+              movieCardOutHandler={this._movieCardOutHandler}
               movieCardClickHandler={this._movieCardClickHandler}
+              activeMovieId={this.state.activeMovieCard}
+              canPlayVideo={this.state.canPlayVideo}
               key={filmInfo.id}
             />
           ))}
@@ -76,29 +101,7 @@ MovieList.propTypes = {
         title: PropTypes.string.isRequired,
         poster: PropTypes.string.isRequired,
         altPoster: PropTypes.string,
-      })
-  ),
-  filmsFullInfo: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired,
-        altPoster: PropTypes.String,
-        background: PropTypes.string.isRequired,
-        altBackground: PropTypes.string,
-        description: PropTypes.string.isRequired,
-        review: PropTypes.string.isRequired,
-        genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-        year: PropTypes.number.isRequired,
-        duration: PropTypes.string,
-        age: PropTypes.string,
-        rating: PropTypes.shape({
-          score: PropTypes.string.isRequired,
-          level: PropTypes.string.isRequired,
-          count: PropTypes.number.isRequired,
-        }),
-        director: PropTypes.string.isRequired,
-        starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+        src: PropTypes.string.isRequired,
       })
   ),
   setMovieCardId: PropTypes.func.isRequired,

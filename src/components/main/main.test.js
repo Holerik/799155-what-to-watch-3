@@ -9,6 +9,7 @@ const filmsInfo = [
     title: `Unsane`,
     poster: `img/unsane.jpg`,
     altPoster: `unsane poster`,
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
@@ -33,6 +34,7 @@ const filmsFullInfo = [
     },
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
+    src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
