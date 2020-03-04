@@ -1,60 +1,29 @@
-// moviecard-full.jsx
+// moviecard-details.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
+import {getFullString, selectMoviesByGenre, getRatingLevel} from '../moviecard-full/moviecard-full.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
 
-export const getFullString = (data, delimiter) => {
-  let result = ``;
-  for (let item of data) {
-    result += String.fromCharCode(delimiter) + item;
-  }
-  return result.slice(1);
+const setStarringList = (stars) => {
+  return (
+    <React.Fragment>
+      {
+        stars.map((item, index) => {
+          return (
+            <React.Fragment key={index}>
+              {item} <br />
+            </React.Fragment>
+
+          );
+        })
+      }
+    </React.Fragment>
+  );
 };
 
-export const getRatingLevel = (rating) => {
-  const level = [`Bad`, `Normal`, `Good`, `Very good`, `Awesome`];
-  const fRating = parseFloat(rating);
-  let index = 4;
-  if (fRating < 10) {
-    index = 3;
-  }
-  if (fRating < 8) {
-    index = 2;
-  }
-  if (fRating < 5) {
-    index = 1;
-  }
-  if (fRating < 3) {
-    index = 0;
-  }
-  return level[index];
-};
-
-export const selectMoviesByGenre = (detailMovieInfo, filmsFullInfo) => {
-  for (let genre of detailMovieInfo.genre) {
-    const movies = filmsFullInfo.filter((movie) => {
-      return (movie.id !== detailMovieInfo.id && movie.genre.findIndex((item) => {
-        return item === genre;
-      }) > -1);
-    });
-    if (movies.length > 0) {
-      return movies.map((movie) => {
-        return {
-          id: movie.id,
-          title: movie.title,
-          poster: movie.poster,
-          altPoster: movie.altPoster,
-          src: movie.src,
-        };
-      });
-    }
-  }
-  return null;
-};
-
-class MovieCardFull extends React.PureComponent {
+class MovieCardDetails extends React.PureComponent {
   constructor(props) {
     super(props);
     this._filmsFullInfo = props.filmsFullInfo;
@@ -73,7 +42,7 @@ class MovieCardFull extends React.PureComponent {
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={detailMovieInfo.background} alt={detailMovieInfo.altBackground} />
+            <img src={detailMovieInfo.background} alt={detailMovieInfo.altBackground}/>
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -119,22 +88,34 @@ class MovieCardFull extends React.PureComponent {
 
             <div className="movie-card__desc">
               {children}
-              <div className="movie-rating">
-                <div className="movie-rating__score">{detailMovieInfo.rating.score}</div>
-                <p className="movie-rating__meta">
-                  <span className="movie-rating__level">{detailMovieInfo.rating.level}</span>
-                  <span className="movie-rating__count">{`${detailMovieInfo.rating.count} ratings`}</span>
-                </p>
-              </div>
+              <div className="movie-card__text movie-card__row">
+                <div className="movie-card__text-col">
+                  <p className="movie-card__details-item">
+                    <strong className="movie-card__details-name">Director</strong>
+                    <span className="movie-card__details-value">{detailMovieInfo.director}</span>
+                  </p>
+                  <p className="movie-card__details-item">
+                    <strong className="movie-card__details-name">Starring</strong>
+                    <span className="movie-card__details-value">
+                      {setStarringList(detailMovieInfo.starring)}
+                    </span>
+                  </p>
+                </div>
 
-              <div className="movie-card__text">
-                <p>{detailMovieInfo.description}</p>
-
-                <p>{detailMovieInfo.review}</p>
-
-                <p className="movie-card__director"><strong>{`Director: ${detailMovieInfo.director}`}</strong></p>
-
-                <p className="movie-card__starring"><strong>{`Starring: ${getFullString(detailMovieInfo.starring, 44)}`}</strong></p>
+                <div className="movie-card__text-col">
+                  <p className="movie-card__details-item">
+                    <strong className="movie-card__details-name">Run Time</strong>
+                    <span className="movie-card__details-value">{detailMovieInfo.duration}</span>
+                  </p>
+                  <p className="movie-card__details-item">
+                    <strong className="movie-card__details-name">Genre</strong>
+                    <span className="movie-card__details-value">{getFullString(detailMovieInfo.genre, 183)}</span>
+                  </p>
+                  <p className="movie-card__details-item">
+                    <strong className="movie-card__details-name">Released</strong>
+                    <span className="movie-card__details-value">{detailMovieInfo.year}</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -160,9 +141,9 @@ class MovieCardFull extends React.PureComponent {
   }
 }
 
-export default MovieCardFull;
+export default MovieCardDetails;
 
-MovieCardFull.propTypes = {
+MovieCardDetails.propTypes = {
   movieId: PropTypes.number.isRequired,
   filmsFullInfo: PropTypes.arrayOf(
       PropTypes.shape({
@@ -195,4 +176,3 @@ MovieCardFull.propTypes = {
   ]),
   setMovieCardId: PropTypes.func.isRequired,
 };
-

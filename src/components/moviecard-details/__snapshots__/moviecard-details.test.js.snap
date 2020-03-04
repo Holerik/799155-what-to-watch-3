@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCardFull /> should render detailed movie card 1`] = `
+exports[`<MovieCardDetails /> should render detailed movie card 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
@@ -193,51 +193,100 @@ Array [
             </ul>
           </nav>
           <div
-            className="movie-rating"
+            className="movie-card__text movie-card__row"
           >
             <div
-              className="movie-rating__score"
+              className="movie-card__text-col"
             >
-              8.0
+              <p
+                className="movie-card__details-item"
+              >
+                <strong
+                  className="movie-card__details-name"
+                >
+                  Director
+                </strong>
+                <span
+                  className="movie-card__details-value"
+                >
+                  Greta Gerwig
+                </span>
+              </p>
+              <p
+                className="movie-card__details-item"
+              >
+                <strong
+                  className="movie-card__details-name"
+                >
+                  Starring
+                </strong>
+                <span
+                  className="movie-card__details-value"
+                >
+                  Saoirse Ronan
+                   
+                  <br />
+                  Emma Watson
+                   
+                  <br />
+                  Florence Pugh
+                   
+                  <br />
+                  Meryl Streep
+                   
+                  <br />
+                  Timothee Chalamet
+                   
+                  <br />
+                </span>
+              </p>
             </div>
-            <p
-              className="movie-rating__meta"
+            <div
+              className="movie-card__text-col"
             >
-              <span
-                className="movie-rating__level"
+              <p
+                className="movie-card__details-item"
               >
-                Very good
-              </span>
-              <span
-                className="movie-rating__count"
+                <strong
+                  className="movie-card__details-name"
+                >
+                  Run Time
+                </strong>
+                <span
+                  className="movie-card__details-value"
+                >
+                  2h 15min
+                </span>
+              </p>
+              <p
+                className="movie-card__details-item"
               >
-                150 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              Based on Loiusa May Alcott’s classic novel with the same name, Little Women is a timeless tale of love, life and ambitions
-            </p>
-            <p>
-              A writer, a sketch artist, an aspiring actress and a budding pianist. All four March sisters are gifted with a unique talent, but they live in the times where the only two choices for women are marriage and death. Writer-director Greta Gerwig
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: Greta Gerwig
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: Saoirse Ronan,Emma Watson,Florence Pugh,Meryl Streep,Timothee Chalamet
-              </strong>
-            </p>
+                <strong
+                  className="movie-card__details-name"
+                >
+                  Genre
+                </strong>
+                <span
+                  className="movie-card__details-value"
+                >
+                  Drama·Romance
+                </span>
+              </p>
+              <p
+                className="movie-card__details-item"
+              >
+                <strong
+                  className="movie-card__details-name"
+                >
+                  Released
+                </strong>
+                <span
+                  className="movie-card__details-value"
+                >
+                  2019
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -258,6 +307,35 @@ Array [
         <div
           className="catalog__movies-list"
         >
+          <article
+            className="small-movie-card catalog__movies-card"
+          >
+            <div
+              className="small-movie-card__image"
+              id="1"
+              onClick={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+            >
+              <img
+                alt="ittle Women poster"
+                height="175"
+                src="img/little-woman-poster.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+              onClick={[Function]}
+            >
+              <a
+                className="small-movie-card__link"
+                href="/moviecard-full"
+              >
+                Little Women
+              </a>
+            </h3>
+          </article>
           <article
             className="small-movie-card catalog__movies-card"
           >
@@ -293,35 +371,6 @@ Array [
             <div
               className="small-movie-card__image"
               id="3"
-              onClick={[Function]}
-              onMouseOut={[Function]}
-              onMouseOver={[Function]}
-            >
-              <img
-                alt="ittle Women poster"
-                height="175"
-                src="img/little-woman-poster.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-              onClick={[Function]}
-            >
-              <a
-                className="small-movie-card__link"
-                href="/moviecard-full"
-              >
-                Little Women
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-          >
-            <div
-              className="small-movie-card__image"
-              id="4"
               onClick={[Function]}
               onMouseOut={[Function]}
               onMouseOver={[Function]}

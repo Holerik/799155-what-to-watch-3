@@ -23,6 +23,7 @@ const filmsFullInfo = [
     altBackground: `Movie background`,
     description: `Based on Loiusa May Alcott’s classic novel with the same name, Little Women is a timeless tale of love, life and ambitions`,
     review: `A writer, a sketch artist, an aspiring actress and a budding pianist. All four March sisters are gifted with a unique talent, but they live in the times where the only two choices for women are marriage and death. Writer-director Greta Gerwig`,
+    reviews: [0, 1, 2, 3, 4],
     genre: [`Drama`, `Romance`],
     year: 2019,
     duration: `2h 15min`,
@@ -47,6 +48,7 @@ const promoMovie = {
   altBackground: `Fantomas background`,
   description: `The best men of France - a brave journalist and an extremely energetic commissioner - attack the trail of a mysterious criminal mastermind`,
   review: `A supervillain known as Fantomas tries to foil a couple of foes: the police inspector who is trying to catch him and the reporter who doesn’t believe in his existence`,
+  reviews: [0, 1, 2, 3, 4],
   genre: [`Comedy`, `Adventure`, `Crime`],
   year: 1964,
   duration: `1h 40min`,
@@ -58,6 +60,7 @@ const promoMovie = {
   },
   director: `André Hunebelle`,
   starring: [`Jean Marais`, `Louis de Funès`, `Mylène Demongeot`, `Jacques Dynam`, `Robert Dalban`],
+  src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 const setMovieCardId = () => {};
@@ -69,7 +72,6 @@ it(`<Main /> should render Terminator film card`, () => {
       filmsFullInfo={filmsFullInfo}
       setMovieCardId={setMovieCardId}
       promoMovie={promoMovie}
-
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

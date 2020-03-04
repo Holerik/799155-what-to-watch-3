@@ -4,9 +4,15 @@ import React from 'react';
 import Main from '../main/main.jsx';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
+import MovieFull from '../moviecard-full/moviecard-full.jsx';
+import MovieDetails from '../moviecard-details/moviecard-details.jsx';
+import MovieReviews from '../moviecard-reviews/moviecard-reviews.jsx';
+import withMovieNav from '../../hocs/with-movie-nav/with-movie-nav.jsx';
 
 const idKey = `cardId`;
+const MovieCardFull = withMovieNav(MovieFull);
+const MovieCardDetails = withMovieNav(MovieDetails);
+const MovieCardReviews = withMovieNav(MovieReviews);
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -49,7 +55,26 @@ class App extends React.PureComponent {
           </Route>
           <Route path='/moviecard-full'>
             <MovieCardFull
-              detailMovieInfo={this._filmsFullInfo[parseInt(this._getCookie(idKey), 10)]}
+              movieId={parseInt(this._getCookie(idKey), 10)}
+              filmsFullInfo={this._filmsFullInfo}
+              setMovieCardId={this._setMovieCardId}
+              activeItem={0}
+            />
+          </Route>
+          <Route path='/moviecard-details'>
+            <MovieCardDetails
+              movieId={parseInt(this._getCookie(idKey), 10)}
+              filmsFullInfo={this._filmsFullInfo}
+              setMovieCardId={this._setMovieCardId}
+              activeItem={1}
+            />
+          </Route>
+          <Route path='/moviecard-reviews'>
+            <MovieCardReviews
+              movieId={parseInt(this._getCookie(idKey), 10)}
+              filmsFullInfo={this._filmsFullInfo}
+              setMovieCardId={this._setMovieCardId}
+              activeItem={2}
             />
           </Route>
         </Switch>
@@ -70,7 +95,10 @@ class App extends React.PureComponent {
     }
     return (
       <MovieCardFull
-        detailMovieInfo={this._filmsFullInfo[this.state.cardId]}
+        movieId={this.state.cardId}
+        filmsFullInfo={this._filmsFullInfo}
+        setMovieCardId={this._setMovieCardId}
+        activeItem={0}
       />
     );
   }
@@ -83,6 +111,7 @@ App.propTypes = {
         title: PropTypes.string.isRequired,
         poster: PropTypes.string.isRequired,
         altPoster: PropTypes.string,
+        src: PropTypes.string.isRequired,
       })
   ),
 };
@@ -109,6 +138,7 @@ App.propTypes = {
         }),
         director: PropTypes.string.isRequired,
         starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+        src: PropTypes.string.isRequired,
       })
   )
 };
@@ -123,6 +153,7 @@ App.propTypes = {
     altBackground: PropTypes.string,
     description: PropTypes.string.isRequired,
     review: PropTypes.string.isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.number),
     genre: PropTypes.arrayOf(PropTypes.string).isRequired,
     year: PropTypes.number.isRequired,
     duration: PropTypes.string,
@@ -134,6 +165,7 @@ App.propTypes = {
     }),
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
+    src: PropTypes.string.isRequired,
   })
 };
 
