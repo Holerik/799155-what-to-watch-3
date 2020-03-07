@@ -64,6 +64,7 @@ class MovieList extends React.PureComponent {
   }
 
   _movieCardClickHandler(evt) {
+    evt.preventDefault();
     const filmCard = this._getClickedFilmCard(evt);
     if (filmCard === undefined) {
       this._setMovieCardId(this.state.activeMovieCard);

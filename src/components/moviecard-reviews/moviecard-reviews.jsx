@@ -7,6 +7,7 @@ import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
 import Review from '../review/review.jsx';
 import {reviewsInfo} from '../../mocks/reviews.js';
+import Tabs from '../tabs/tabs.jsx';
 
 class MovieCardReviews extends React.PureComponent {
   constructor(props) {
@@ -14,6 +15,7 @@ class MovieCardReviews extends React.PureComponent {
     this._filmsFullInfo = props.filmsFullInfo;
     this._movieId = props.movieId;
     this.setMovieCardId = props.setMovieCardId;
+    this.setPageId = props.setPageId;
   }
 
   _addReviewItems(detailedMovieInfo) {
@@ -33,9 +35,8 @@ class MovieCardReviews extends React.PureComponent {
   }
 
   render() {
-    const {children} = this.props;
     const detailedMovieInfo = this._filmsFullInfo.find((movie) => {
-      return movie.id === this._movieId;
+      return movie.id === this.props.movieId;
     });
     detailedMovieInfo.rating.level = getRatingLevel(detailedMovieInfo.rating.score);
     const selectedMovies = selectMoviesByGenre(detailedMovieInfo, this._filmsFullInfo);
@@ -52,6 +53,8 @@ class MovieCardReviews extends React.PureComponent {
           <header className="page-header movie-card__head">
             <Header
               avatar={`img/avatar.jpg`}
+              setPageId={this.setPageId}
+              setMovieId={this.setMovieCardId}
             />
           </header>
 
@@ -89,7 +92,10 @@ class MovieCardReviews extends React.PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              {children}
+              {<Tabs
+                activeItem={2}
+                setPageId={this.setPageId}
+              />}
               <div className="movie-card__reviews movie-card__row">
                 <div className="movie-card__reviews-col">
                   {this._addReviewItems(detailedMovieInfo)}
@@ -114,6 +120,8 @@ class MovieCardReviews extends React.PureComponent {
 
         <footer className="page-footer">
           <Footer
+            setPageId={this.setPageId}
+            setMovieId={this.setMovieCardId}
           />
         </footer>
       </div>
@@ -156,4 +164,5 @@ MovieCardReviews.propTypes = {
     PropTypes.node
   ]),
   setMovieCardId: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
 };

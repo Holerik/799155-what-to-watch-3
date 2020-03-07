@@ -64,6 +64,7 @@ const promoMovie = {
 };
 
 const setMovieCardId = () => {};
+const setPageId = () => {};
 
 it(`<Main /> should render Terminator film card`, () => {
   const tree = renderer
@@ -72,6 +73,7 @@ it(`<Main /> should render Terminator film card`, () => {
       filmsFullInfo={filmsFullInfo}
       setMovieCardId={setMovieCardId}
       promoMovie={promoMovie}
+      setPageId={setPageId}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

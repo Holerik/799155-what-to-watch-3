@@ -63,12 +63,19 @@ const promoMovie = {
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
+const setPageId = () => {};
+const setMovieId = () => {};
+
 it(`<App /> should render Fantomas film card`, () => {
   const tree = renderer
     .create(<App
       filmsInfo={filmsInfo}
       filmsFullInfo={filmsFullInfo}
       promoMovie={promoMovie}
+      setMovieId={setMovieId}
+      setPageId={setPageId}
+      movieId={-1}
+      pageId={0}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

@@ -99,6 +99,8 @@ const detailedFilmInfo = [
 ];
 
 const setMovieCardId = () => {};
+const setPageId = () => {};
+
 
 it(`<MovieCardReviews /> should render movie card with reviews`, () => {
   const tree = renderer
@@ -106,20 +108,8 @@ it(`<MovieCardReviews /> should render movie card with reviews`, () => {
       filmsFullInfo={detailedFilmInfo}
       movieId={0}
       setMovieCardId={setMovieCardId}
+      setPageId={setPageId}
     >
-      <nav className="movie-nav movie-card__nav">
-        <ul className="movie-nav__list">
-          <li className="movie-nav__item">
-            <a href="#" className="movie-nav__link">Overview</a>
-          </li>
-          <li className="movie-nav__item movie-nav__item--active">
-            <a href="#" className="movie-nav__link">Details</a>
-          </li>
-          <li className="movie-nav__item">
-            <a href="#" className="movie-nav__link">Reviews</a>
-          </li>
-        </ul>
-      </nav>
     </MovieCardReviews>)
     .toJSON();
   expect(tree).toMatchSnapshot();

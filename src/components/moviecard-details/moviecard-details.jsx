@@ -5,6 +5,7 @@ import {getFullString, selectMoviesByGenre, getRatingLevel} from '../moviecard-f
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
+import Tabs from '../tabs/tabs.jsx';
 
 const setStarringList = (stars) => {
   return (
@@ -29,12 +30,12 @@ class MovieCardDetails extends React.PureComponent {
     this._filmsFullInfo = props.filmsFullInfo;
     this._movieId = props.movieId;
     this.setMovieCardId = props.setMovieCardId;
+    this.setPageId = props.setPageId;
   }
 
   render() {
-    const {children} = this.props;
     const detailMovieInfo = this._filmsFullInfo.find((movie) => {
-      return movie.id === this._movieId;
+      return movie.id === this.props.movieId;
     });
     detailMovieInfo.rating.level = getRatingLevel(detailMovieInfo.rating.score);
     const selectedMovies = selectMoviesByGenre(detailMovieInfo, this._filmsFullInfo);
@@ -50,6 +51,8 @@ class MovieCardDetails extends React.PureComponent {
           <header className="page-header movie-card__head">
             <Header
               avatar={`img/avatar.jpg`}
+              setPageId={this.setPageId}
+              setMovieId={this.setMovieCardId}
             />
           </header>
 
@@ -87,7 +90,10 @@ class MovieCardDetails extends React.PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              {children}
+              {<Tabs
+                activeItem={1}
+                setPageId={this.setPageId}
+              />}
               <div className="movie-card__text movie-card__row">
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
@@ -134,6 +140,8 @@ class MovieCardDetails extends React.PureComponent {
 
         <footer className="page-footer">
           <Footer
+            setPageId={this.setPageId}
+            setMovieId={this.setMovieCardId}
           />
         </footer>
       </div>
@@ -170,9 +178,6 @@ MovieCardDetails.propTypes = {
         src: PropTypes.string.isRequired,
       })
   ),
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
   setMovieCardId: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
 };

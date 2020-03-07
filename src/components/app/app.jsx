@@ -4,15 +4,30 @@ import React from 'react';
 import Main from '../main/main.jsx';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
-import MovieFull from '../moviecard-full/moviecard-full.jsx';
-import MovieDetails from '../moviecard-details/moviecard-details.jsx';
-import MovieReviews from '../moviecard-reviews/moviecard-reviews.jsx';
-import withMovieNav from '../../hocs/with-movie-nav/with-movie-nav.jsx';
+import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
+import MovieCardDetails from '../moviecard-details/moviecard-details.jsx';
+import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
 
-const idKey = `cardId`;
-const MovieCardFull = withMovieNav(MovieFull);
-const MovieCardDetails = withMovieNav(MovieDetails);
-const MovieCardReviews = withMovieNav(MovieReviews);
+export const idKey = `cardId`;
+export const pageKey = `pageId`;
+
+export const setCookie = (key, value) => {
+  document.cookie = `${key}=${value}; `;
+};
+
+export const getCookie = (key) => {
+  const cookie = document.cookie;
+  let start = cookie.indexOf(`${key}=`);
+  if (start === -1) {
+    return `-1`;
+  }
+  start = cookie.indexOf(`=`, start);
+  const fin = cookie.indexOf(`;`, start);
+  if (fin === -1) {
+    return cookie.slice(start + 1);
+  }
+  return cookie.slice(start + 1, fin);
+};
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -21,29 +36,21 @@ class App extends React.PureComponent {
     this._filmsFullInfo = props.filmsFullInfo;
     this._promoMovie = props.promoMovie;
     this._setMovieCardId = this._setMovieCardId.bind(this);
+    this._setPageId = this._setPageId.bind(this);
     this.state = {
-      cardId: -1,
+      cardId: props.movieId,
+      pageId: props.pageId,
     };
-  }
-
-  _setCookie(key, value) {
-    document.cookie = `${key}=${value}; `;
-  }
-
-  _getCookie(key) {
-    const cookie = document.cookie;
-    let start = cookie.indexOf(`${key}=`);
-    start = cookie.indexOf(`=`, start);
-    const fin = cookie.indexOf(`;`, start);
-    if (fin === -1) {
-      return cookie.slice(start + 1);
-    }
-    return cookie.slice(start + 1, fin);
   }
 
   _setMovieCardId(id) {
     this.setState({cardId: id});
-    this._setCookie(idKey, id);
+    this.props.setMovieId(id);
+  }
+
+  _setPageId(id) {
+    this.setState({pageId: id});
+    this.props.setPageId(id);
   }
 
   render() {
@@ -52,30 +59,6 @@ class App extends React.PureComponent {
         <Switch>
           <Route exact path='/'>
             {this._renderApp()}
-          </Route>
-          <Route path='/moviecard-full'>
-            <MovieCardFull
-              movieId={parseInt(this._getCookie(idKey), 10)}
-              filmsFullInfo={this._filmsFullInfo}
-              setMovieCardId={this._setMovieCardId}
-              activeItem={0}
-            />
-          </Route>
-          <Route path='/moviecard-details'>
-            <MovieCardDetails
-              movieId={parseInt(this._getCookie(idKey), 10)}
-              filmsFullInfo={this._filmsFullInfo}
-              setMovieCardId={this._setMovieCardId}
-              activeItem={1}
-            />
-          </Route>
-          <Route path='/moviecard-reviews'>
-            <MovieCardReviews
-              movieId={parseInt(this._getCookie(idKey), 10)}
-              filmsFullInfo={this._filmsFullInfo}
-              setMovieCardId={this._setMovieCardId}
-              activeItem={2}
-            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -90,17 +73,41 @@ class App extends React.PureComponent {
           filmsFullInfo={this._filmsFullInfo}
           setMovieCardId={this._setMovieCardId}
           promoMovie={this._promoMovie}
+          setPageId={this._setPageId}
         />
       );
     }
-    return (
-      <MovieCardFull
-        movieId={this.state.cardId}
-        filmsFullInfo={this._filmsFullInfo}
-        setMovieCardId={this._setMovieCardId}
-        activeItem={0}
-      />
-    );
+    if (this.state.pageId === 0) {
+      return (
+        <MovieCardFull
+          movieId={this.state.cardId}
+          filmsFullInfo={this._filmsFullInfo}
+          setMovieCardId={this._setMovieCardId}
+          setPageId={this._setPageId}
+        />
+      );
+    }
+    if (this.state.pageId === 1) {
+      return (
+        <MovieCardDetails
+          movieId={this.state.cardId}
+          filmsFullInfo={this._filmsFullInfo}
+          setMovieCardId={this._setMovieCardId}
+          setPageId={this._setPageId}
+        />
+      );
+    }
+    if (this.state.pageId === 2) {
+      return (
+        <MovieCardReviews
+          movieId={this.state.cardId}
+          filmsFullInfo={this._filmsFullInfo}
+          setMovieCardId={this._setMovieCardId}
+          setPageId={this._setPageId}
+        />
+      );
+    }
+    return null;
   }
 }
 
@@ -166,7 +173,11 @@ App.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     src: PropTypes.string.isRequired,
-  })
+  }),
+  movieId: PropTypes.number.isRequired,
+  pageId: PropTypes.number.isRequired,
+  setPageId: PropTypes.func.isRequired,
+  setMovieId: PropTypes.func.isRequired,
 };
 
 export default App;

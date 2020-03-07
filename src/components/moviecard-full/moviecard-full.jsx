@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
+import Tabs from '../tabs/tabs.jsx';
 
 export const getFullString = (data, delimiter) => {
   let result = ``;
@@ -60,12 +61,12 @@ class MovieCardFull extends React.PureComponent {
     this._filmsFullInfo = props.filmsFullInfo;
     this._movieId = props.movieId;
     this.setMovieCardId = props.setMovieCardId;
+    this.setPageId = props.setPageId;
   }
 
   render() {
-    const {children} = this.props;
     const detailMovieInfo = this._filmsFullInfo.find((movie) => {
-      return movie.id === this._movieId;
+      return movie.id === this.props.movieId;
     });
     detailMovieInfo.rating.level = getRatingLevel(detailMovieInfo.rating.score);
     const selectedMovies = selectMoviesByGenre(detailMovieInfo, this._filmsFullInfo);
@@ -81,6 +82,8 @@ class MovieCardFull extends React.PureComponent {
           <header className="page-header movie-card__head">
             <Header
               avatar={`img/avatar.jpg`}
+              setPageId={this.setPageId}
+              setMovieId={this.setMovieCardId}
             />
           </header>
 
@@ -118,7 +121,10 @@ class MovieCardFull extends React.PureComponent {
             </div>
 
             <div className="movie-card__desc">
-              {children}
+              {<Tabs
+                activeItem={0}
+                setPageId={this.setPageId}
+              />}
               <div className="movie-rating">
                 <div className="movie-rating__score">{detailMovieInfo.rating.score}</div>
                 <p className="movie-rating__meta">
@@ -153,6 +159,8 @@ class MovieCardFull extends React.PureComponent {
 
         <footer className="page-footer">
           <Footer
+            setPageId={this.setPageId}
+            setMovieId={this.setMovieCardId}
           />
         </footer>
       </div>
@@ -189,10 +197,7 @@ MovieCardFull.propTypes = {
         src: PropTypes.string.isRequired,
       })
   ),
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]),
   setMovieCardId: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
 };
 

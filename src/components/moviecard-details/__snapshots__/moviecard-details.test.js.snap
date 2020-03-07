@@ -29,7 +29,8 @@ Array [
         >
           <a
             className="logo__link"
-            href="main.html"
+            href="/"
+            onClick={[Function]}
           >
             <span
               className="logo__letter logo__letter--1"
@@ -159,9 +160,12 @@ Array [
           >
             <ul
               className="movie-nav__list"
+              onClick={[Function]}
+              onMouseOver={[Function]}
             >
               <li
-                className="movie-nav__item"
+                className="movie-nav__item
+                    "
               >
                 <a
                   className="movie-nav__link"
@@ -171,7 +175,8 @@ Array [
                 </a>
               </li>
               <li
-                className="movie-nav__item movie-nav__item--active"
+                className="movie-nav__item
+                    movie-nav__item--active"
               >
                 <a
                   className="movie-nav__link"
@@ -181,7 +186,8 @@ Array [
                 </a>
               </li>
               <li
-                className="movie-nav__item"
+                className="movie-nav__item
+                    "
               >
                 <a
                   className="movie-nav__link"
@@ -330,7 +336,7 @@ Array [
             >
               <a
                 className="small-movie-card__link"
-                href="/moviecard-full"
+                href="#"
               >
                 Little Women
               </a>
@@ -359,7 +365,7 @@ Array [
             >
               <a
                 className="small-movie-card__link"
-                href="/moviecard-full"
+                href="#"
               >
                 Little Women
               </a>
@@ -388,7 +394,7 @@ Array [
             >
               <a
                 className="small-movie-card__link"
-                href="/moviecard-full"
+                href="#"
               >
                 Little Women
               </a>
@@ -405,7 +411,8 @@ Array [
       >
         <a
           className="logo__link logo__link--light"
-          href="main.html"
+          href="/"
+          onClick={[Function]}
         >
           <span
             className="logo__letter logo__letter--1"

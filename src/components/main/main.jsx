@@ -5,7 +5,7 @@ import MovieList from '../movielist/movielist.jsx';
 import Header from '../header/header.jsx';
 
 const Main = (props) => {
-  const {filmsInfo, setMovieCardId, promoMovie} = props;
+  const {filmsInfo, setMovieCardId, setPageId, promoMovie} = props;
   const getFullString = (data, delimiter) => {
     let result = ``;
     for (let item of data) {
@@ -25,6 +25,8 @@ const Main = (props) => {
       <header className="page-header movie-card__head">
         <Header
           avatar={`img/avatar.jpg`}
+          setMovieId={setMovieCardId}
+          setPageId={setPageId}
         />
       </header>
 
@@ -131,6 +133,7 @@ Main.propTypes = {
       })
   ),
   setMovieCardId: PropTypes.func.isRequired,
+  setPageId: PropTypes.func.isRequired,
   filmsFullInfo: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,

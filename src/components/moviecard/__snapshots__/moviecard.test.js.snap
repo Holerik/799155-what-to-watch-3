@@ -24,7 +24,7 @@ exports[`<MovieCard /> should render moviee small card 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/moviecard-full"
+      href="#"
     >
       Rampage
     </a>

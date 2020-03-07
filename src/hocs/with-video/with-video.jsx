@@ -58,6 +58,7 @@ const withVideo = (Component) => {
       video.oncanplaythrough = null;
       video.ontimeupdate = null;
       video.src = ``;
+      this._videoRef = null;
     }
 
     render() {

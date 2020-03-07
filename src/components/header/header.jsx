@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 
 const Header = (props) => {
   const {avatar} = props;
+  const initIds = () => {
+    props.setPageId(0);
+    props.setMovieId(-1);
+  };
   return <React.Fragment>
     <div className="logo">
-      <a href="main.html" className="logo__link">
+      <a href="/" className="logo__link" onClick={initIds}>
         <span className="logo__letter logo__letter--1">W</span>
         <span className="logo__letter logo__letter--2">T</span>
         <span className="logo__letter logo__letter--3">W</span>
@@ -23,6 +27,8 @@ const Header = (props) => {
 
 Header.propTypes = {
   avatar: PropTypes.string.isRequired,
+  setPageId: PropTypes.func.isRequired,
+  setMovieId: PropTypes.func.isRequired,
 };
 
 export default Header;

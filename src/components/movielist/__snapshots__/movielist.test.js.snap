@@ -27,7 +27,7 @@ exports[`<MoveList /> should render small movie cadr list 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/moviecard-full"
+        href="#"
       >
         The Commuter
       </a>
