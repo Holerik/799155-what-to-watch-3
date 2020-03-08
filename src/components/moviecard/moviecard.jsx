@@ -37,7 +37,7 @@ const MovieCard = (props) => {
         <img src={movie.poster} alt={movie.altPoster} width="280" height="175"/>
       </div>
       <h3 className="small-movie-card__title" onClick={movieCardClickHandler}>
-        <a className="small-movie-card__link" href="/moviecard-full">{movie.title}</a>
+        <a className="small-movie-card__link" href="#">{movie.title}</a>
       </h3>
     </article>
   </React.Fragment>;

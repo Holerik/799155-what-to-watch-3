@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<MovieCardFull /> should render detailed movie card 1`] = `
+exports[`<MovieCardReviews /> should render movie card with reviews 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
@@ -165,7 +165,7 @@ Array [
             >
               <li
                 className="movie-nav__item
-                    movie-nav__item--active"
+                    "
               >
                 <a
                   className="movie-nav__link"
@@ -187,7 +187,7 @@ Array [
               </li>
               <li
                 className="movie-nav__item
-                    "
+                    movie-nav__item--active"
               >
                 <a
                   className="movie-nav__link"
@@ -199,51 +199,78 @@ Array [
             </ul>
           </nav>
           <div
-            className="movie-rating"
+            className="movie-card__reviews movie-card__row"
           >
             <div
-              className="movie-rating__score"
+              className="movie-card__reviews-col"
             >
-              8.0
+              <div
+                className="review"
+              >
+                <blockquote
+                  className="review__quote"
+                >
+                  <p
+                    className="review__text"
+                  >
+                    Anderson's films are too precious for some, but for those of us willing to lose ourselves in them, they're a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.
+                  </p>
+                  <footer
+                    className="review__details"
+                  >
+                    <cite
+                      className="review__author"
+                    >
+                      Bill Goodykoontz
+                    </cite>
+                    <time
+                      className="review__date"
+                      dateTime="2015-11-18"
+                    >
+                      November 18, 2015
+                    </time>
+                  </footer>
+                </blockquote>
+                <div
+                  className="review__rating"
+                >
+                  8,0
+                </div>
+              </div>
+              <div
+                className="review"
+              >
+                <blockquote
+                  className="review__quote"
+                >
+                  <p
+                    className="review__text"
+                  >
+                    I didn't find it amusing, and while I can appreciate the creativity, it's an hour and 40 minutes I wish I could take back.
+                  </p>
+                  <footer
+                    className="review__details"
+                  >
+                    <cite
+                      className="review__author"
+                    >
+                      Amanda Greever
+                    </cite>
+                    <time
+                      className="review__date"
+                      dateTime="2015-11-18"
+                    >
+                      November 18, 2015
+                    </time>
+                  </footer>
+                </blockquote>
+                <div
+                  className="review__rating"
+                >
+                  8,0
+                </div>
+              </div>
             </div>
-            <p
-              className="movie-rating__meta"
-            >
-              <span
-                className="movie-rating__level"
-              >
-                Very good
-              </span>
-              <span
-                className="movie-rating__count"
-              >
-                150 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              Based on Loiusa May Alcott’s classic novel with the same name, Little Women is a timeless tale of love, life and ambitions
-            </p>
-            <p>
-              A writer, a sketch artist, an aspiring actress and a budding pianist. All four March sisters are gifted with a unique talent, but they live in the times where the only two choices for women are marriage and death. Writer-director Greta Gerwig
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: Greta Gerwig
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: Saoirse Ronan,Emma Watson,Florence Pugh,Meryl Streep,Timothee Chalamet
-              </strong>
-            </p>
           </div>
         </div>
       </div>
@@ -264,6 +291,35 @@ Array [
         <div
           className="catalog__movies-list"
         >
+          <article
+            className="small-movie-card catalog__movies-card"
+          >
+            <div
+              className="small-movie-card__image"
+              id="1"
+              onClick={[Function]}
+              onMouseOut={[Function]}
+              onMouseOver={[Function]}
+            >
+              <img
+                alt="ittle Women poster"
+                height="175"
+                src="img/little-woman-poster.jpg"
+                width="280"
+              />
+            </div>
+            <h3
+              className="small-movie-card__title"
+              onClick={[Function]}
+            >
+              <a
+                className="small-movie-card__link"
+                href="#"
+              >
+                Little Women
+              </a>
+            </h3>
+          </article>
           <article
             className="small-movie-card catalog__movies-card"
           >
@@ -299,35 +355,6 @@ Array [
             <div
               className="small-movie-card__image"
               id="3"
-              onClick={[Function]}
-              onMouseOut={[Function]}
-              onMouseOver={[Function]}
-            >
-              <img
-                alt="ittle Women poster"
-                height="175"
-                src="img/little-woman-poster.jpg"
-                width="280"
-              />
-            </div>
-            <h3
-              className="small-movie-card__title"
-              onClick={[Function]}
-            >
-              <a
-                className="small-movie-card__link"
-                href="#"
-              >
-                Little Women
-              </a>
-            </h3>
-          </article>
-          <article
-            className="small-movie-card catalog__movies-card"
-          >
-            <div
-              className="small-movie-card__image"
-              id="4"
               onClick={[Function]}
               onMouseOut={[Function]}
               onMouseOver={[Function]}
