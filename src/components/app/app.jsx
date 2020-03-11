@@ -7,6 +7,8 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
 import MovieCardDetails from '../moviecard-details/moviecard-details.jsx';
 import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
+import {ActionCreator} from '../../reducer.js';
+import {connect} from 'react-redux';
 
 export const idKey = `cardId`;
 export const pageKey = `pageId`;
@@ -32,25 +34,8 @@ export const getCookie = (key) => {
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._filmsInfo = props.filmsInfo;
     this._filmsFullInfo = props.filmsFullInfo;
     this._promoMovie = props.promoMovie;
-    this._setMovieCardId = this._setMovieCardId.bind(this);
-    this._setPageId = this._setPageId.bind(this);
-    this.state = {
-      cardId: props.movieId,
-      pageId: props.pageId,
-    };
-  }
-
-  _setMovieCardId(id) {
-    this.setState({cardId: id});
-    this.props.setMovieId(id);
-  }
-
-  _setPageId(id) {
-    this.setState({pageId: id});
-    this.props.setPageId(id);
   }
 
   render() {
@@ -66,46 +51,47 @@ class App extends React.PureComponent {
   }
 
   _renderApp() {
-    if (this.state.cardId === -1) {
+    if (this.props.movieId === -1) {
       return (
         <Main
-          filmsInfo={this._filmsInfo}
+          filmsInfo={this.props.filmsInfo}
           filmsFullInfo={this._filmsFullInfo}
-          setMovieCardId={this._setMovieCardId}
+          setMovieId={this.props.setMovieId}
           promoMovie={this._promoMovie}
-          setPageId={this._setPageId}
+          setPageId={this.props.setPageId}
+          setGenre={this.props.setGenre}
+          genre={this.props.genre}
         />
       );
     }
-    if (this.state.pageId === 0) {
-      return (
-        <MovieCardFull
-          movieId={this.state.cardId}
-          filmsFullInfo={this._filmsFullInfo}
-          setMovieCardId={this._setMovieCardId}
-          setPageId={this._setPageId}
-        />
-      );
-    }
-    if (this.state.pageId === 1) {
-      return (
-        <MovieCardDetails
-          movieId={this.state.cardId}
-          filmsFullInfo={this._filmsFullInfo}
-          setMovieCardId={this._setMovieCardId}
-          setPageId={this._setPageId}
-        />
-      );
-    }
-    if (this.state.pageId === 2) {
-      return (
-        <MovieCardReviews
-          movieId={this.state.cardId}
-          filmsFullInfo={this._filmsFullInfo}
-          setMovieCardId={this._setMovieCardId}
-          setPageId={this._setPageId}
-        />
-      );
+    switch (this.props.pageId) {
+      case 0:
+        return (
+          <MovieCardFull
+            movieId={this.props.movieId}
+            filmsFullInfo={this._filmsFullInfo}
+            setMovieCardId={this.props.setMovieId}
+            setPageId={this.props.setPageId}
+          />
+        );
+      case 1:
+        return (
+          <MovieCardDetails
+            movieId={this.props.movieId}
+            filmsFullInfo={this._filmsFullInfo}
+            setMovieCardId={this.props.setMovieId}
+            setPageId={this.props.setPageId}
+          />
+        );
+      case 2:
+        return (
+          <MovieCardReviews
+            movieId={this.props.movieId}
+            filmsFullInfo={this._filmsFullInfo}
+            setMovieCardId={this.props.setMovieId}
+            setPageId={this.props.setPageId}
+          />
+        );
     }
     return null;
   }
@@ -147,7 +133,13 @@ App.propTypes = {
         starring: PropTypes.arrayOf(PropTypes.string).isRequired,
         src: PropTypes.string.isRequired,
       })
-  )
+  ),
+  movieId: PropTypes.number.isRequired,
+  pageId: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
+  setPageId: PropTypes.func.isRequired,
+  setMovieId: PropTypes.func.isRequired,
+  setGenre: PropTypes.func.isRequired,
 };
 
 App.propTypes = {
@@ -174,10 +166,39 @@ App.propTypes = {
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     src: PropTypes.string.isRequired,
   }),
-  movieId: PropTypes.number.isRequired,
-  pageId: PropTypes.number.isRequired,
-  setPageId: PropTypes.func.isRequired,
-  setMovieId: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  movieId: state.movieId,
+  pageId: state.pageId,
+  genre: state.genre,
+  filmsInfo: state.filmsInfo,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setGenre(genre) {
+    dispatch(ActionCreator.setCurrentGenre(genre));
+    dispatch(ActionCreator.getFilmsInfo(genre));
+  },
+  setMovieId(id) {
+    dispatch(ActionCreator.setMovieId(id));
+  },
+  setPageId(id) {
+    dispatch(ActionCreator.setPageId(id));
+  }
+});
+
+/*
+const mergeProps = (stateProps, dispatchProps) => {
+  const {genre} = stateProps;
+  const {dispatch} = dispatcProps;
+  dispatch(ActionCreator.setCurrentGenre(genre));
+  return ({
+   genre: genre,
+   filmsInfo: selectMoviesByGenre(genre),
+  });
+}
+*/
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

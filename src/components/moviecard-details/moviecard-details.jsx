@@ -1,7 +1,7 @@
 // moviecard-details.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getFullString, selectMoviesByGenre, getRatingLevel} from '../moviecard-full/moviecard-full.jsx';
+import {getFullString, selectMoviesByGenre, getRatingLevel, movieCardTabItems} from '../moviecard-full/moviecard-full.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
@@ -93,6 +93,7 @@ class MovieCardDetails extends React.PureComponent {
               {<Tabs
                 activeItem={1}
                 setPageId={this.setPageId}
+                tabItems={movieCardTabItems}
               />}
               <div className="movie-card__text movie-card__row">
                 <div className="movie-card__text-col">
