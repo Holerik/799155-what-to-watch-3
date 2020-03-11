@@ -14,6 +14,8 @@ export const getFullString = (data, delimiter) => {
   return result.slice(1);
 };
 
+export const movieCardTabItems = [`Overview`, `Details`, `Reviews`];
+
 export const getRatingLevel = (rating) => {
   const level = [`Bad`, `Normal`, `Good`, `Very good`, `Awesome`];
   const fRating = parseFloat(rating);
@@ -124,6 +126,7 @@ class MovieCardFull extends React.PureComponent {
               {<Tabs
                 activeItem={0}
                 setPageId={this.setPageId}
+                tabItems={movieCardTabItems}
               />}
               <div className="movie-rating">
                 <div className="movie-rating__score">{detailMovieInfo.rating.score}</div>

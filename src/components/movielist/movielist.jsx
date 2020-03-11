@@ -9,7 +9,6 @@ const TIME_INTERVAL = 1000; // ms
 class MovieList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._filmsInfo = props.filmsInfo;
     this._setMovieCardId = props.setMovieCardId;
     this._movieCardActivateHandler = this._movieCardActivateHandler.bind(this);
     this._movieCardClickHandler = this._movieCardClickHandler.bind(this);
@@ -30,7 +29,7 @@ class MovieList extends React.PureComponent {
 
   _getActiveFilmCard(evt) {
     const target = evt.target;
-    const filmCard = this._filmsInfo.find((filmInfo) => {
+    const filmCard = this.props.filmsInfo.find((filmInfo) => {
       return filmInfo.id === parseInt(target.id, 10);
     });
     return filmCard;
@@ -38,7 +37,7 @@ class MovieList extends React.PureComponent {
 
   _getClickedFilmCard(evt) {
     const target = evt.target;
-    const filmCard = this._filmsInfo.find((filmInfo) => {
+    const filmCard = this.props.filmsInfo.find((filmInfo) => {
       return filmInfo.title === target.text;
     });
     return filmCard;
@@ -76,7 +75,7 @@ class MovieList extends React.PureComponent {
   render() {
     return <React.Fragment>
       <div className="catalog__movies-list">
-        { this._filmsInfo.slice(this._movieCardFirstOnPage, this._movieCardLastOnPage)
+        { this.props.filmsInfo.slice(this._movieCardFirstOnPage, this._movieCardLastOnPage)
           .map((filmInfo) => (
             <MovieCard
               movie={filmInfo}

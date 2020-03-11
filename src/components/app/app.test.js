@@ -2,8 +2,12 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import App from './app.jsx';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 
-const filmsInfo = [
+const mockStore = configureStore([]);
+
+const filmsShortInfo = [
   {
     id: 33,
     title: `Overboard`,
@@ -65,18 +69,29 @@ const promoMovie = {
 
 const setPageId = () => {};
 const setMovieId = () => {};
+const setGenre = () => {};
 
 it(`<App /> should render Fantomas film card`, () => {
+  const store = mockStore({
+    filmsInfo: filmsShortInfo,
+    pageId: 0,
+    movieId: -1,
+    genre: `All genres`,
+  });
   const tree = renderer
-    .create(<App
-      filmsInfo={filmsInfo}
-      filmsFullInfo={filmsFullInfo}
-      promoMovie={promoMovie}
-      setMovieId={setMovieId}
-      setPageId={setPageId}
-      movieId={-1}
-      pageId={0}
-    />)
+    .create(<Provider store={store}>
+      <App
+        filmsInfo={filmsShortInfo}
+        filmsFullInfo={filmsFullInfo}
+        promoMovie={promoMovie}
+        setMovieId={setMovieId}
+        setPageId={setPageId}
+        setGenre={setGenre}
+        movieId={-1}
+        pageId={0}
+        genre={`All genres`}
+      />
+    </Provider>)
     .toJSON();
   expect(tree).toMatchSnapshot();
 });

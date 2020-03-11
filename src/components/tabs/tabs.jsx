@@ -2,14 +2,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 class Tabs extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._setPageId = props.setPageId;
+    this._setActiveItem = props.setPageId;
     this._movieTabMouseOverHandler = this._movieTabMouseOverHandler.bind(this);
     this._movieTabClickHandler = this._movieTabClickHandler.bind(this);
-    this._tabItems = [`Overview`, `Details`, `Reviews`];
+    this._tabItems = props.tabItems;
     this.state = {
       activeItem: props.activeItem,
     };
@@ -25,7 +24,7 @@ class Tabs extends React.PureComponent {
                 <li className= {`movie-nav__item
                     ${this.state.activeItem === index || this.props.activeItem === index ? `movie-nav__item--active` : ``}`}>
                   <a href={index === this.props.activeItem ? `#` : `#`}
-                    className="movie-nav__link">{this._tabItems[index]}</a>
+                    className="movie-nav__link">{item}</a>
                 </li>
               </React.Fragment>
             );
@@ -43,7 +42,7 @@ class Tabs extends React.PureComponent {
   }
 
   _movieTabClickHandler() {
-    this._setPageId(this.state.activeItem);
+    this._setActiveItem(this.state.activeItem);
   }
 
   render() {
@@ -65,6 +64,7 @@ class Tabs extends React.PureComponent {
 Tabs.propTypes = {
   activeItem: PropTypes.number.isRequired,
   setPageId: PropTypes.func.isRequired,
+  tabItems: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Tabs;

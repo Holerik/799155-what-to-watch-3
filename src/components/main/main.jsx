@@ -3,9 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MovieList from '../movielist/movielist.jsx';
 import Header from '../header/header.jsx';
+import Footer from '../footer/footer.jsx';
+import GenreTabs from '../genre-tabs/genre-tabs.jsx';
+import {ALL_GENRES} from '../../reducer.js';
+
 
 const Main = (props) => {
-  const {filmsInfo, setMovieCardId, setPageId, promoMovie} = props;
+  const {filmsInfo, setMovieId, setPageId, setGenre, promoMovie, genre} = props;
   const getFullString = (data, delimiter) => {
     let result = ``;
     for (let item of data) {
@@ -13,6 +17,14 @@ const Main = (props) => {
     }
     return result.slice(1);
   };
+  let genres = [ALL_GENRES];
+  for (let movie of props.filmsFullInfo) {
+    genres = genres.concat(movie.genre.filter((item) => {
+      return genres.indexOf(item) === -1;
+    }));
+  }
+  genres = genres.slice(0, 10);
+  const activeItem = genres.indexOf(genre);
 
   return <React.Fragment>
     <section className="movie-card">
@@ -25,7 +37,7 @@ const Main = (props) => {
       <header className="page-header movie-card__head">
         <Header
           avatar={`img/avatar.jpg`}
-          setMovieId={setMovieCardId}
+          setMovieId={setMovieId}
           setPageId={setPageId}
         />
       </header>
@@ -64,59 +76,29 @@ const Main = (props) => {
     <div className="page-content">
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-      <ul className="catalog__genres-list">
-        <li className="catalog__genres-item catalog__genres-item--active">
-          <a href="#" className="catalog__genres-link">All genres</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Comedies</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Crime</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Documentary</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Dramas</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Horror</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Kids & Family</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Romance</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Sci-Fi</a>
-        </li>
-        <li className="catalog__genres-item">
-          <a href="#" className="catalog__genres-link">Thrillers</a>
-        </li>
-      </ul>
+      {<GenreTabs
+        activeItem={activeItem}
+        setPageId={setPageId}
+        tabItems={genres}
+        filmsFullInfo={props.filmsFullInfo}
+        setGenre={setGenre}
+        genre={genre}
+      />}
+
       <section className="catalog">
         <MovieList
           filmsInfo={filmsInfo}
-          setMovieCardId={setMovieCardId}
+          setMovieCardId={setMovieId}
         />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>
       </section>
       <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2020 What to watch Ltd.</p>
-        </div>
+        <Footer
+          setPageId={setPageId}
+          setMovieId={setMovieId}
+        />
       </footer>
     </div>
   </React.Fragment>;
@@ -132,8 +114,10 @@ Main.propTypes = {
         src: PropTypes.string.isRequired,
       })
   ),
-  setMovieCardId: PropTypes.func.isRequired,
+  setMovieId: PropTypes.func.isRequired,
   setPageId: PropTypes.func.isRequired,
+  setGenre: PropTypes.func.isRequired,
+  genre: PropTypes.string.isRequired,
   filmsFullInfo: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
@@ -184,7 +168,7 @@ Main.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     src: PropTypes.string.isRequired,
-  })
+  }),
 };
 
 export default Main;

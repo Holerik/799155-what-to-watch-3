@@ -1,7 +1,7 @@
 // moviecard-reviews.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getFullString, selectMoviesByGenre, getRatingLevel} from '../moviecard-full/moviecard-full.jsx';
+import {getFullString, selectMoviesByGenre, getRatingLevel, movieCardTabItems} from '../moviecard-full/moviecard-full.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import MovieList from '../movielist/movielist.jsx';
@@ -95,6 +95,7 @@ class MovieCardReviews extends React.PureComponent {
               {<Tabs
                 activeItem={2}
                 setPageId={this.setPageId}
+                tabItems={movieCardTabItems}
               />}
               <div className="movie-card__reviews movie-card__row">
                 <div className="movie-card__reviews-col">
