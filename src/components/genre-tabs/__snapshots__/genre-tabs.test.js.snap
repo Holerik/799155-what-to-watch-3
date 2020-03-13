@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GenreTabs /> should render correctly 1`] = `
+<ul
+  className="catalog__genres-list"
+  onClick={[Function]}
+  onMouseOver={[Function]}
+>
+  <li
+    className="catalog__genres-item
+                    catalog__genres-item--active"
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      All genres
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item
+                    "
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Dramas
+    </a>
+  </li>
+  <li
+    className="catalog__genres-item
+                    "
+  >
+    <a
+      className="catalog__genres-link"
+      href="#"
+    >
+      Crime
+    </a>
+  </li>
+</ul>
+`;

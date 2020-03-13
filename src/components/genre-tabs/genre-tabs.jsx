@@ -39,7 +39,7 @@ class GenreTabs extends Tabs {
   render() {
     return (
       <React.Fragment>
-        <ul className="movie-nav__list"
+        <ul className="catalog__genres-list"
           onClick={this._movieTabClickHandler}
           onMouseOver={this._movieTabMouseOverHandler}
         >

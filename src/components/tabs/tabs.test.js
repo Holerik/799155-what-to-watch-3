@@ -1,4 +1,4 @@
-// footer.test.js
+// tabs.test.js
 import React from 'react';
 import renderer from 'react-test-renderer';
 import Tabs from './tabs.jsx';
