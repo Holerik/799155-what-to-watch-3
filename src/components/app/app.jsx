@@ -61,6 +61,8 @@ class App extends React.PureComponent {
           setPageId={this.props.setPageId}
           setGenre={this.props.setGenre}
           genre={this.props.genre}
+          playButtonClickHandler={() => {}}
+          listButtonClickHandler={() => {}}
         />
       );
     }
@@ -173,6 +175,7 @@ const mapStateToProps = (state) => ({
   pageId: state.pageId,
   genre: state.genre,
   filmsInfo: state.filmsInfo,
+  promoMovie: state.promo,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -185,20 +188,11 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setPageId(id) {
     dispatch(ActionCreator.setPageId(id));
-  }
+  },
+  setPromoMovie(promo) {
+    dispatch(ActionCreator.setPromoMovie(promo));
+  },
 });
-
-/*
-const mergeProps = (stateProps, dispatchProps) => {
-  const {genre} = stateProps;
-  const {dispatch} = dispatcProps;
-  dispatch(ActionCreator.setCurrentGenre(genre));
-  return ({
-   genre: genre,
-   filmsInfo: selectMoviesByGenre(genre),
-  });
-}
-*/
 
 export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

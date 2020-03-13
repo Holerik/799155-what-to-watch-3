@@ -150,7 +150,7 @@ Array [
       Catalog
     </h2>
     <ul
-      className="movie-nav__list"
+      className="catalog__genres-list"
       onClick={[Function]}
       onMouseOver={[Function]}
     >
@@ -228,7 +228,8 @@ Array [
         className="catalog__more"
       >
         <button
-          className="catalog__button"
+          className="catalog__button visually-hidden"
+          onClick={[Function]}
           type="button"
         >
           Show more

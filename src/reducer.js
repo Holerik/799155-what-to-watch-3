@@ -1,27 +1,9 @@
 // reducer.js
-import {filmsInfo as filmsShortInfo, filmsFullInfo} from './mocks/films.js';
+import {filmsFullInfo, promoMovie} from './mocks/films.js';
 
 import {extend} from './utils.js';
 
 export const ALL_GENRES = `All genres`;
-
-const initialState = {
-  // список карточек фильмов с короткой информацией
-  filmsInfo: filmsShortInfo,
-  // текущая страница
-  pageId: 0,
-  // активная карточка
-  movieId: -1,
-  // текущий жанр
-  genre: ALL_GENRES,
-};
-
-const ActionType = {
-  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
-  SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
-  SET_MOVIE_ID: `SET_MOVIE_ID`,
-  SET_PAGE_ID: `SET_PAGE_ID`,
-};
 
 export const selectMoviesByGenre = (genre) => {
   let movies = filmsFullInfo;
@@ -49,6 +31,26 @@ export const selectMoviesByGenre = (genre) => {
   return [];
 };
 
+const initialState = {
+  promo: promoMovie,
+  // список карточек фильмов с короткой информацией
+  filmsInfo: selectMoviesByGenre(ALL_GENRES),
+  // текущая страница
+  pageId: 0,
+  // активная карточка
+  movieId: -1,
+  // текущий жанр
+  genre: ALL_GENRES,
+};
+
+const ActionType = {
+  GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
+  SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
+  SET_MOVIE_ID: `SET_MOVIE_ID`,
+  SET_PAGE_ID: `SET_PAGE_ID`,
+  SET_PROMO_MOVIE: `SET_PROMO_MOVIE`,
+};
+
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.GET_MOVIES_BY_GENRE:
@@ -66,6 +68,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SET_PAGE_ID:
       return extend(state, {
         pageId: action.payload,
+      });
+    case ActionType.SET_PROMO_MOVIE:
+      return extend(state, {
+        promo: action.payload,
       });
   }
   return state;
@@ -87,5 +93,9 @@ export const ActionCreator = {
   setPageId: (id) => ({
     type: ActionType.SET_PAGE_ID,
     payload: id,
+  }),
+  setPromoMovie: (promo) => ({
+    type: ActionType.SET_PROMO_MOVIE,
+    payload: promo,
   }),
 };
