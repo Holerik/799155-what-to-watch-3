@@ -1,7 +1,7 @@
 
 // app.jsx
 import React from 'react';
-import Main from '../main/main.jsx';
+import MainPage from '../main/main.jsx';
 import PropTypes from 'prop-types';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
@@ -9,27 +9,9 @@ import MovieCardDetails from '../moviecard-details/moviecard-details.jsx';
 import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
 import {ActionCreator} from '../../reducer.js';
 import {connect} from 'react-redux';
+import withMain from '../../hocs/with-main/with-main.jsx';
 
-export const idKey = `cardId`;
-export const pageKey = `pageId`;
-
-export const setCookie = (key, value) => {
-  document.cookie = `${key}=${value}; `;
-};
-
-export const getCookie = (key) => {
-  const cookie = document.cookie;
-  let start = cookie.indexOf(`${key}=`);
-  if (start === -1) {
-    return `-1`;
-  }
-  start = cookie.indexOf(`=`, start);
-  const fin = cookie.indexOf(`;`, start);
-  if (fin === -1) {
-    return cookie.slice(start + 1);
-  }
-  return cookie.slice(start + 1, fin);
-};
+const Main = withMain(MainPage);
 
 class App extends React.PureComponent {
   constructor(props) {

@@ -4,132 +4,130 @@ import PropTypes from 'prop-types';
 import {getFullString, selectMoviesByGenre, getRatingLevel, movieCardTabItems} from '../moviecard-full/moviecard-full.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
-import MovieList from '../movielist/movielist.jsx';
+import Movies from '../movielist/movielist.jsx';
 import Review from '../review/review.jsx';
 import {reviewsInfo} from '../../mocks/reviews.js';
-import Tabs from '../tabs/tabs.jsx';
+import PageTabs from '../tabs/tabs.jsx';
+import withTabs from '../../hocs/with-tabs/with-tabs.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
-class MovieCardReviews extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this._filmsFullInfo = props.filmsFullInfo;
-    this._movieId = props.movieId;
-    this.setMovieCardId = props.setMovieCardId;
-    this.setPageId = props.setPageId;
-  }
+const Tabs = withActiveItem(withTabs(PageTabs));
+const MovieList = withActiveItem(Movies);
 
-  _addReviewItems(detailedMovieInfo) {
-    return (
-      <React.Fragment>
-        {
-          detailedMovieInfo.reviews.map((id) => {
-            return (
-              <React.Fragment key={id}>
-                <Review review={reviewsInfo.find((item) => item.id === id)}/>
-              </React.Fragment>
-            );
-          })
-        }
-      </React.Fragment>
-    );
-  }
+const addReviewItems = (detailedMovieInfo) => {
+  return (
+    <React.Fragment>
+      {
+        detailedMovieInfo.reviews.map((id) => {
+          return (
+            <React.Fragment key={id}>
+              <Review review={reviewsInfo.find((item) => item.id === id)}/>
+            </React.Fragment>
+          );
+        })
+      }
+    </React.Fragment>
+  );
+};
 
-  render() {
-    const detailedMovieInfo = this._filmsFullInfo.find((movie) => {
-      return movie.id === this.props.movieId;
-    });
-    detailedMovieInfo.rating.level = getRatingLevel(detailedMovieInfo.rating.score);
-    const selectedMovies = selectMoviesByGenre(detailedMovieInfo, this._filmsFullInfo);
-    return <React.Fragment>
+const MovieCardReviews = React.memo(function MovieCardReviews(props) {
+  const detailedMovieInfo = props.filmsFullInfo.find((movie) => {
+    return movie.id === props.movieId;
+  });
+  detailedMovieInfo.rating.level = getRatingLevel(detailedMovieInfo.rating.score);
+  const selectedMovies = selectMoviesByGenre(detailedMovieInfo, props.filmsFullInfo);
 
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__hero">
-          <div className="movie-card__bg">
-            <img src={detailedMovieInfo.background} alt={detailedMovieInfo.altBackground}/>
+  return (<React.Fragment>
+
+    <section className="movie-card movie-card--full">
+      <div className="movie-card__hero">
+        <div className="movie-card__bg">
+          <img src={detailedMovieInfo.background} alt={detailedMovieInfo.altBackground}/>
+        </div>
+
+        <h1 className="visually-hidden">WTW</h1>
+
+        <header className="page-header movie-card__head">
+          <Header
+            avatar={`img/avatar.jpg`}
+            setPageId={props.setPageId}
+            setMovieId={props.setMovieCardId}
+          />
+        </header>
+
+        <div className="movie-card__wrap">
+          <div className="movie-card__desc">
+            <h2 className="movie-card__title">{detailedMovieInfo.title}</h2>
+            <p className="movie-card__meta">
+              <span className="movie-card__genre">{getFullString(detailedMovieInfo.genre, 183)}</span>
+              <span className="movie-card__year">{detailedMovieInfo.year}</span>
+            </p>
+
+            <div className="movie-card__buttons">
+              <button className="btn btn--play movie-card__button" type="button">
+                <svg viewBox="0 0 19 19" width="19" height="19">
+                  <use xlinkHref="#play-s"></use>
+                </svg>
+                <span>Play</span>
+              </button>
+              <button className="btn btn--list movie-card__button" type="button">
+                <svg viewBox="0 0 19 20" width="19" height="20">
+                  <use xlinkHref="#add"></use>
+                </svg>
+                <span>My list</span>
+              </button>
+              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="movie-card__wrap movie-card__translate-top">
+        <div className="movie-card__info">
+          <div className="movie-card__poster movie-card__poster--big">
+            <img src={detailedMovieInfo.poster} alt={detailedMovieInfo.altPoster} width="218" height="327" />
           </div>
 
-          <h1 className="visually-hidden">WTW</h1>
-
-          <header className="page-header movie-card__head">
-            <Header
-              avatar={`img/avatar.jpg`}
-              setPageId={this.setPageId}
-              setMovieId={this.setMovieCardId}
-            />
-          </header>
-
-          <div className="movie-card__wrap">
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{detailedMovieInfo.title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{getFullString(detailedMovieInfo.genre, 183)}</span>
-                <span className="movie-card__year">{detailedMovieInfo.year}</span>
-              </p>
-
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+          <div className="movie-card__desc">
+            {<Tabs
+              activeItem={2}
+              mouseClickHandler={props.setPageId}
+              tabItems={movieCardTabItems}
+            />}
+            <div className="movie-card__reviews movie-card__row">
+              <div className="movie-card__reviews-col">
+                {addReviewItems(detailedMovieInfo)}
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div className="movie-card__wrap movie-card__translate-top">
-          <div className="movie-card__info">
-            <div className="movie-card__poster movie-card__poster--big">
-              <img src={detailedMovieInfo.poster} alt={detailedMovieInfo.altPoster} width="218" height="327" />
-            </div>
+    <div className="page-content">
+      <section className="catalog catalog--like-this">
+        <h2 className="catalog__title">More like this</h2>
 
-            <div className="movie-card__desc">
-              {<Tabs
-                activeItem={2}
-                setPageId={this.setPageId}
-                tabItems={movieCardTabItems}
-              />}
-              <div className="movie-card__reviews movie-card__row">
-                <div className="movie-card__reviews-col">
-                  {this._addReviewItems(detailedMovieInfo)}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
+          <MovieList
+            activeItem={-1}
+            tabItems={selectedMovies}
+            mouseClickHandler={props.setMovieCardId}
+          />
         </div>
       </section>
 
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">More like this</h2>
+      <footer className="page-footer">
+        <Footer
+          setPageId={props.setPageId}
+          setMovieId={props.setMovieCardId}
+        />
+      </footer>
+    </div>
 
-          <div>
-            <MovieList
-              filmsInfo={selectedMovies}
-              setMovieCardId={this.setMovieCardId}
-            />
-          </div>
-        </section>
+  </React.Fragment>);
+});
 
-        <footer className="page-footer">
-          <Footer
-            setPageId={this.setPageId}
-            setMovieId={this.setMovieCardId}
-          />
-        </footer>
-      </div>
-
-    </React.Fragment>;
-  }
-}
 
 export default MovieCardReviews;
 

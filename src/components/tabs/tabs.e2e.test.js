@@ -1,4 +1,4 @@
-// main.e2e.test.js
+// tabs.e2e.test.js
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -11,19 +11,19 @@ Enzyme.configure({
 });
 
 it(`Should tab be pressed`, () => {
-  let pageId = -1;
+  const tabClickHandler = jest.fn();
+  const tabMouseOverHandler = jest.fn();
 
-  const setPageId = (id) => {
-    pageId = id;
-  };
   const main = shallow(
       <Tabs
         activeItem={5}
+        stateItem={5}
         tabItems={tabItems}
-        setPageId={setPageId}
+        tabClickHandler={tabClickHandler}
+        tabMouseOverHandler={tabMouseOverHandler}
       />
   );
   const tab = main.find(`ul.movie-nav__list`);
   tab.props().onClick();
-  expect(pageId).toEqual(5);
+  expect(tabClickHandler.mock.calls.length).toBe(1);
 });

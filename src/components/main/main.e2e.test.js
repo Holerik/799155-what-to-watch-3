@@ -67,6 +67,7 @@ const promoMovie = {
 const setMovieCardId = () => {};
 const setPageId = () => {};
 const setGenre = () => {};
+const setShowLimits = () => {};
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -84,7 +85,10 @@ it(`Should play button be pressed`, () => {
         promoMovie={promoMovie}
         setPageId={setPageId}
         setGenre={setGenre}
+        setShowLimits={setShowLimits}
         genre={`All genres`}
+        firstCard= {0}
+        lastCard={0}
         playButtonClickHandler={playButtonClickHandler}
         listButtonClickHandler={listButtonClickHandler}
       />
@@ -106,7 +110,10 @@ it(`Should list button be pressed`, () => {
         promoMovie={promoMovie}
         setPageId={setPageId}
         setGenre={setGenre}
+        setShowLimits={setShowLimits}
         genre={`All genres`}
+        firstCard= {0}
+        lastCard={0}
         playButtonClickHandler={playButtonClickHandler}
         listButtonClickHandler={listButtonClickHandler}
       />
