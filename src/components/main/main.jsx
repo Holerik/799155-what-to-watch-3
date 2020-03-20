@@ -1,14 +1,20 @@
 // main.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import MovieList from '../movielist/movielist.jsx';
+import Movies from '../movielist/movielist.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
-import GenreTabs from '../genre-tabs/genre-tabs.jsx';
+import Tabs from '../genre-tabs/genre-tabs.jsx';
 import {ALL_GENRES} from '../../reducer.js';
-import ShowMore, {MOVIE_CARDS_ON_PAGE} from '../show-more/show-more.jsx';
+import ShowMore from '../show-more/show-more.jsx';
+import withShowMore from '../../hocs/with-show-more/with-show-more.jsx';
+import withTabs from '../../hocs/with-tabs/with-tabs.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
 
-const MAX_GENGES_COUNT = 10;
+const MAX_GENRES_COUNT = 10;
+const GenreTabs = withActiveItem(withTabs(Tabs));
+const MovieList = withActiveItem(Movies);
+const ShowMoreButton = withShowMore(ShowMore);
 
 const getFullString = (data, delimiter) => {
   let result = ``;
@@ -21,40 +27,23 @@ const getFullString = (data, delimiter) => {
 class Main extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      firstCard: 0,
-      lastCard: props.filmsInfo.length < MOVIE_CARDS_ON_PAGE ? props.filmsInfo.length - 1 : MOVIE_CARDS_ON_PAGE - 1,
-    };
-    this.setShowLimits = this.setShowLimits.bind(this);
-    this.setGenre = this.setGenre.bind(this);
-  }
-
-  setShowLimits(limits) {
-    this.setState({
-      firstCard: limits.first,
-      lastCard: limits.last,
-    });
-  }
-
-  setGenre(genre) {
-    this.props.setGenre(genre);
-    this.setState({
-      firstCard: 0,
-      lastCard: this.props.filmsInfo.length < MOVIE_CARDS_ON_PAGE ? this.props.filmsInfo.length - 1 : MOVIE_CARDS_ON_PAGE - 1,
-    });
-  }
-
-  render() {
-    let genres = [ALL_GENRES];
+    this.genres = [ALL_GENRES];
     for (let movie of this.props.filmsFullInfo) {
-      genres = genres.concat(movie.genre.filter((item) => {
-        return genres.indexOf(item) === -1;
+      this.genres = this.genres.concat(movie.genre.filter((item) => {
+        return this.genres.indexOf(item) === -1;
       }));
     }
-    genres = genres.slice(0, MAX_GENGES_COUNT);
-    const activeItem = genres.indexOf(this.props.genre);
-    const firstCard = this.state.firstCard;
-    const lastCard = firstCard + MOVIE_CARDS_ON_PAGE - 1;
+    this.genres = this.genres.slice(0, MAX_GENRES_COUNT);
+    this._genreTabsClickHandler = this._genreTabsClickHandler.bind(this);
+  }
+
+  _genreTabsClickHandler(id) {
+    const genre = this.genres[id];
+    this.props.setGenre(genre);
+  }
+  render() {
+    const activeItem = this.genres.indexOf(this.props.genre);
+
     return <React.Fragment>
       <section className="movie-card">
         <div className="movie-card__bg">
@@ -111,22 +100,20 @@ class Main extends React.PureComponent {
 
         {<GenreTabs
           activeItem={activeItem}
-          setPageId={this.props.setPageId}
-          tabItems={genres}
-          filmsFullInfo={this.props.filmsFullInfo}
-          setGenre={this.setGenre}
-          genre={this.props.genre}
+          mouseClickHandler={this._genreTabsClickHandler}
+          tabItems={this.genres}
         />}
 
         <section className="catalog">
           <MovieList
-            filmsInfo={this.props.filmsInfo.slice(firstCard, lastCard + 1)}
-            setMovieCardId={this.props.setMovieId}
+            activeItem={-1}
+            tabItems={this.props.filmsInfo.slice(this.props.firstCard, this.props.lastCard + 1)}
+            mouseClickHandler={this.props.setMovieId}
           />
-          {<ShowMore
+          {<ShowMoreButton
             filmsCount={this.props.filmsInfo.length}
-            setShowLimits={this.setShowLimits}
-            lastCard={this.state.lastCard}
+            setShowLimits={this.props.setShowLimits}
+            lastCard={this.props.lastCard}
           />}
         </section>
         <footer className="page-footer">
@@ -153,9 +140,12 @@ Main.propTypes = {
   setMovieId: PropTypes.func.isRequired,
   setPageId: PropTypes.func.isRequired,
   setGenre: PropTypes.func.isRequired,
+  setShowLimits: PropTypes.func.isRequired,
   genre: PropTypes.string.isRequired,
   playButtonClickHandler: PropTypes.func.isRequired,
   listButtonClickHandler: PropTypes.func.isRequired,
+  firstCard: PropTypes.number.isRequired,
+  lastCard: PropTypes.number.isRequired,
   filmsFullInfo: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,

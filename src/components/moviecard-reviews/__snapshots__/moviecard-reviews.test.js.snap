@@ -163,9 +163,10 @@ Array [
               onClick={[Function]}
               onMouseOver={[Function]}
             >
+               
               <li
                 className="movie-nav__item
-                    "
+                        "
               >
                 <a
                   className="movie-nav__link"
@@ -176,7 +177,7 @@ Array [
               </li>
               <li
                 className="movie-nav__item
-                    "
+                        "
               >
                 <a
                   className="movie-nav__link"
@@ -187,7 +188,7 @@ Array [
               </li>
               <li
                 className="movie-nav__item
-                    movie-nav__item--active"
+                        movie-nav__item--active"
               >
                 <a
                   className="movie-nav__link"

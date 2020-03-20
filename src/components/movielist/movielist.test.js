@@ -13,13 +13,16 @@ const filmsInfo = [
   }
 ];
 
-const setMovieCardId = () => {};
+const mouseClickHandler = jest.fn();
+const setActiveItem = () => {};
 
 it(`<MoveList /> should render small movie cadr list`, () => {
   const tree = renderer
     .create(<MovieList
-      filmsInfo={filmsInfo}
-      setMovieCardId={setMovieCardId}
+      tabItems={filmsInfo}
+      stateItem={0}
+      setActiveItem={setActiveItem}
+      mouseClickHandler={mouseClickHandler}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

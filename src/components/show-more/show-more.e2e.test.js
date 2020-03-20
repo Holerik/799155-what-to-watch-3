@@ -10,23 +10,15 @@ Enzyme.configure({
 });
 
 it(`Should check Show more button was clicked`, () => {
-  let firstCard = -1;
-  let lastCard = -1;
-  const setShowLimits = (limits) => {
-    firstCard = limits.first;
-    lastCard = limits.last;
-  };
-
+  const showMoreClickHandler = jest.fn();
   const main = mount(
       <ShowMore
         filmsCount={7}
-        setShowLimits={setShowLimits}
+        showMoreClickHandler={showMoreClickHandler}
         lastCard={6}
       />
   );
   const button = main.find(`button.catalog__button`);
-  button.simulate(`click`);
-  expect(main.state().lastCard).toEqual(6);
-  expect(firstCard).toEqual(6);
-  expect(lastCard).toEqual(6);
+  button.props().onClick();
+  expect(showMoreClickHandler.mock.calls.length).toBe(1);
 });

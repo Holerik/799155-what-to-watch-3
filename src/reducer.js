@@ -43,7 +43,7 @@ const initialState = {
   genre: ALL_GENRES,
 };
 
-const ActionType = {
+export const ActionType = {
   GET_MOVIES_BY_GENRE: `GET_MOVIES_BY_GENRE`,
   SET_CURRENT_GENRE: `SET_CURRENT_GENRE`,
   SET_MOVIE_ID: `SET_MOVIE_ID`,

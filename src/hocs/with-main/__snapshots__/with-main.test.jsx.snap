@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Main /> should render Terminator film card 1`] = `
+exports[`Should correctly render the main page 1`] = `
 Array [
   <section
     className="movie-card"
@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="Fantomas background"
-        src="img/fantomas-bg.jpg"
+        alt="With Fantomas background"
+        src="img/with-fantomas-bg.jpg"
       />
     </div>
     <h1
@@ -71,9 +71,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="Fantomas poster"
+            alt="With Fantomas poster"
             height="327"
-            src="img/fantomas-poster.jpg"
+            src="img/with-fantomas-poster.jpg"
             width="218"
           />
         </div>
@@ -83,7 +83,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Fantomas
+            With Fantomas
           </h2>
           <p
             className="movie-card__meta"
@@ -202,15 +202,15 @@ Array [
         >
           <div
             className="small-movie-card__image"
-            id="501"
+            id="555"
             onClick={[Function]}
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <img
-              alt="unsane poster"
+              alt="whis-unsane poster"
               height="175"
-              src="img/unsane.jpg"
+              src="img/with-unsane.jpg"
               width="280"
             />
           </div>
@@ -222,7 +222,36 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Unsane
+              With Unsane
+            </a>
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+        >
+          <div
+            className="small-movie-card__image"
+            id="255"
+            onClick={[Function]}
+            onMouseOut={[Function]}
+            onMouseOver={[Function]}
+          >
+            <img
+              alt="whis-second-unsane poster"
+              height="175"
+              src="img/second-with-unsane.jpg"
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+              href="#"
+            >
+              Second With Unsane
             </a>
           </h3>
         </article>

@@ -156,9 +156,10 @@ Array [
       onClick={[Function]}
       onMouseOver={[Function]}
     >
+       
       <li
         className="catalog__genres-item
-                    catalog__genres-item--active"
+                      catalog__genres-item--active"
       >
         <a
           className="catalog__genres-link"
@@ -169,7 +170,7 @@ Array [
       </li>
       <li
         className="catalog__genres-item
-                    "
+                      "
       >
         <a
           className="catalog__genres-link"
@@ -180,7 +181,7 @@ Array [
       </li>
       <li
         className="catalog__genres-item
-                    "
+                      "
       >
         <a
           className="catalog__genres-link"

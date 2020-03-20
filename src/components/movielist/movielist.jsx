@@ -9,12 +9,12 @@ const TIME_INTERVAL = 1000; // ms
 class MovieList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._setMovieCardId = props.setMovieCardId;
+    // this._setMovieCardId = props.setMovieCardId;
     this._movieCardActivateHandler = this._movieCardActivateHandler.bind(this);
     this._movieCardClickHandler = this._movieCardClickHandler.bind(this);
     this._movieCardOutHandler = this._movieCardOutHandler.bind(this);
     this.state = {
-      activeMovieCard: -1,
+      // activeItem: -1,
       showIsDetailed: true,
       canPlayVideo: false,
     };
@@ -29,7 +29,7 @@ class MovieList extends React.PureComponent {
 
   _getActiveFilmCard(evt) {
     const target = evt.target;
-    const filmCard = this.props.filmsInfo.find((filmInfo) => {
+    const filmCard = this.props.tabItems.find((filmInfo) => {
       return filmInfo.id === parseInt(target.id, 10);
     });
     return filmCard;
@@ -37,7 +37,7 @@ class MovieList extends React.PureComponent {
 
   _getClickedFilmCard(evt) {
     const target = evt.target;
-    const filmCard = this.props.filmsInfo.find((filmInfo) => {
+    const filmCard = this.props.tabItems.find((filmInfo) => {
       return filmInfo.title === target.text;
     });
     return filmCard;
@@ -46,7 +46,8 @@ class MovieList extends React.PureComponent {
   _movieCardActivateHandler(evt) {
     const filmCard = this._getActiveFilmCard(evt);
     const id = filmCard === undefined ? -1 : filmCard.id;
-    this.setState({activeMovieCard: id});
+    this.props.setActiveItem(id);
+    // this.setState({activeItem: id});
     if (this._lastTimeOut) {
       clearTimeout(this._lastTimeOut);
     }
@@ -56,7 +57,8 @@ class MovieList extends React.PureComponent {
   }
 
   _movieCardOutHandler() {
-    this.setState({activeMovieCard: -1});
+    this.props.setActiveItem(-1);
+    // this.setState({activeItem: -1});
     this.setState({canPlayVideo: false});
     clearTimeout(this._lastTimeOut);
     this._lastTimeOut = null;
@@ -65,24 +67,24 @@ class MovieList extends React.PureComponent {
   _movieCardClickHandler(evt) {
     evt.preventDefault();
     const filmCard = this._getClickedFilmCard(evt);
-    if (filmCard === undefined) {
-      this._setMovieCardId(this.state.activeMovieCard);
-    } else {
-      this._setMovieCardId(filmCard.id);
+    if (filmCard !== undefined) {
+      // this._setMovieCardId(filmCard.id);
+      this.props.setActiveItem(filmCard.id);
     }
+    this.props.mouseClickHandler();
   }
 
   render() {
     return <React.Fragment>
       <div className="catalog__movies-list">
-        { this.props.filmsInfo.slice(this._movieCardFirstOnPage, this._movieCardLastOnPage)
+        { this.props.tabItems.slice(this._movieCardFirstOnPage, this._movieCardLastOnPage)
           .map((filmInfo) => (
             <MovieCard
               movie={filmInfo}
               movieCardActivateHandler={this._movieCardActivateHandler}
               movieCardOutHandler={this._movieCardOutHandler}
               movieCardClickHandler={this._movieCardClickHandler}
-              activeMovieId={this.state.activeMovieCard}
+              activeMovieId={this.props.stateItem}
               canPlayVideo={this.state.canPlayVideo}
               key={filmInfo.id}
             />
@@ -95,7 +97,7 @@ class MovieList extends React.PureComponent {
 export default MovieList;
 
 MovieList.propTypes = {
-  filmsInfo: PropTypes.arrayOf(
+  tabItems: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -104,5 +106,7 @@ MovieList.propTypes = {
         src: PropTypes.string.isRequired,
       })
   ),
-  setMovieCardId: PropTypes.func.isRequired,
+  stateItem: PropTypes.number.isRequired,
+  mouseClickHandler: PropTypes.func.isRequired,
+  setActiveItem: PropTypes.func.isRequired,
 };
