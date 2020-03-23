@@ -109,6 +109,8 @@ it(`<MovieCardDetails /> should render detailed movie card`, () => {
       movieId={0}
       setMovieCardId={setMovieCardId}
       setPageId={setPageId}
+      playButtonClickHandler = {() => {}}
+      listButtonClickHandler = {() => {}}
     >
     </MovieCardDetails>
     )

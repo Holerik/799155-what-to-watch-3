@@ -20,6 +20,7 @@ ReactDom.render(
         pageId={0}
         setGenre={() => {}}
         setPromoMovie={() => {}}
+        playMovie={() => {}}
       />
     </Provider>,
     document.querySelector(`#root`)

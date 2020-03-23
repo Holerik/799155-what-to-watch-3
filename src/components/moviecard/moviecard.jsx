@@ -24,6 +24,7 @@ const MovieCard = (props) => {
               isPlaying={true}
               playButtonClickHandler={playButtonClickHandler}
               pauseButtonClickHandler={pauseButtonClickHandler}
+              exitButtonClickHandler={() => {}}
             />
           }
         </div>

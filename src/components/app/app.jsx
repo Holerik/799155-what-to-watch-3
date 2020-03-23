@@ -10,14 +10,19 @@ import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
 import {ActionCreator} from '../../reducer.js';
 import {connect} from 'react-redux';
 import withMain from '../../hocs/with-main/with-main.jsx';
+import Player from '../video-player/video-player.jsx';
+import withVideo from '../../hocs/with-video/with-video.jsx';
 
 const Main = withMain(MainPage);
+const VideoPlayer = withVideo(Player);
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this._filmsFullInfo = props.filmsFullInfo;
     this._promoMovie = props.promoMovie;
+    this.playButtonClickHandler = this.playButtonClickHandler.bind(this);
+    this.stopMoviePlay = this.stopMoviePlay.bind(this);
   }
 
   render() {
@@ -32,7 +37,56 @@ class App extends React.PureComponent {
     );
   }
 
+  playButtonClickHandler() {
+    if (this.props.movieId === -1) {
+      this.props.playMovie({
+        id: this.props.promoMovie.id,
+        title: this.props.promoMovie.title,
+        poster: this.props.promoMovie.poster,
+        altPoster: this.props.promoMovie.altPoster,
+        src: this.props.promoMovie.src,
+      });
+    } else {
+      const movie = this._filmsFullInfo.find((info) => {
+        return info.id === this.props.movieId;
+      });
+      this.props.playMovie({
+        id: movie.id,
+        title: movie.title,
+        poster: movie.poster,
+        altPoster: movie.altPoster,
+        src: movie.src,
+      });
+    }
+  }
+
+  stopMoviePlay() {
+    this.props.playMovie(undefined);
+  }
+
+  setFullScreen(evt) {
+    evt.preventDefault();
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      document.documentElement.requestFullscreen();
+    }
+  }
+
   _renderApp() {
+    if (this.props.movie !== undefined) {
+      return (
+        <VideoPlayer
+          src={this.props.movie.src}
+          isMuted={false}
+          poster={this.props.movie.poster}
+          width={480}
+          isPlaying={true}
+          exitButtonClickHandler={this.stopMoviePlay}
+          setFullScreen={this.setFullScreen}
+        />
+      );
+    }
     if (this.props.movieId === -1) {
       return (
         <Main
@@ -43,7 +97,7 @@ class App extends React.PureComponent {
           setPageId={this.props.setPageId}
           setGenre={this.props.setGenre}
           genre={this.props.genre}
-          playButtonClickHandler={() => {}}
+          playButtonClickHandler={this.playButtonClickHandler}
           listButtonClickHandler={() => {}}
         />
       );
@@ -56,6 +110,8 @@ class App extends React.PureComponent {
             filmsFullInfo={this._filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
+            playButtonClickHandler={this.playButtonClickHandler}
+            listButtonClickHandler={() => {}}
           />
         );
       case 1:
@@ -65,6 +121,8 @@ class App extends React.PureComponent {
             filmsFullInfo={this._filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
+            playButtonClickHandler={this.playButtonClickHandler}
+            listButtonClickHandler={() => {}}
           />
         );
       case 2:
@@ -74,6 +132,8 @@ class App extends React.PureComponent {
             filmsFullInfo={this._filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
+            playButtonClickHandler={this.playButtonClickHandler}
+            listButtonClickHandler={() => {}}
           />
         );
     }
@@ -83,6 +143,15 @@ class App extends React.PureComponent {
 
 App.propTypes = {
   filmsInfo: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired,
+        altPoster: PropTypes.string,
+        src: PropTypes.string.isRequired,
+      })
+  ),
+  movie: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
         title: PropTypes.string.isRequired,
@@ -124,6 +193,7 @@ App.propTypes = {
   setPageId: PropTypes.func.isRequired,
   setMovieId: PropTypes.func.isRequired,
   setGenre: PropTypes.func.isRequired,
+  playMovie: PropTypes.func.isRequired,
 };
 
 App.propTypes = {
@@ -158,6 +228,7 @@ const mapStateToProps = (state) => ({
   genre: state.genre,
   filmsInfo: state.filmsInfo,
   promoMovie: state.promo,
+  movie: state.movie,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -173,6 +244,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setPromoMovie(promo) {
     dispatch(ActionCreator.setPromoMovie(promo));
+  },
+  playMovie(movie) {
+    dispatch(ActionCreator.playMovie(movie));
   },
 });
 

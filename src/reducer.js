@@ -41,6 +41,8 @@ const initialState = {
   movieId: -1,
   // текущий жанр
   genre: ALL_GENRES,
+  // проигрывание видео
+  movie: undefined,
 };
 
 export const ActionType = {
@@ -49,6 +51,7 @@ export const ActionType = {
   SET_MOVIE_ID: `SET_MOVIE_ID`,
   SET_PAGE_ID: `SET_PAGE_ID`,
   SET_PROMO_MOVIE: `SET_PROMO_MOVIE`,
+  PLAY_MOVIE: `PLAY_MOVIE`,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -72,6 +75,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.SET_PROMO_MOVIE:
       return extend(state, {
         promo: action.payload,
+      });
+    case ActionType.PLAY_MOVIE:
+      return extend(state, {
+        movie: action.payload,
       });
   }
   return state;
@@ -97,5 +104,9 @@ export const ActionCreator = {
   setPromoMovie: (promo) => ({
     type: ActionType.SET_PROMO_MOVIE,
     payload: promo,
+  }),
+  playMovie: (movie) => ({
+    type: ActionType.PLAY_MOVIE,
+    payload: movie,
   }),
 };

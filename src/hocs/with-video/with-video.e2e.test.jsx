@@ -18,8 +18,9 @@ const movie = {
 };
 
 it(`Should play button be pressed`, () => {
-  const playButtonClickHandler = jest.fn();
-  const pauseButtonClickHandler = jest.fn();
+  const exitButtonClickHandler = jest.fn();
+  const setFullScreen = jest.fn();
+
   const VideoPlayer = withVideo(Player);
 
   const main = mount(
@@ -29,8 +30,8 @@ it(`Should play button be pressed`, () => {
         poster={movie.poster}
         width={280}
         isPlaying={true}
-        playButtonClickHandler={playButtonClickHandler}
-        pauseButtonClickHandler={pauseButtonClickHandler}
+        exitButtonClickHandler={exitButtonClickHandler}
+        setFullScreen={setFullScreen}
       />
   );
   window.HTMLMediaElement.prototype.play = () => {};
@@ -43,8 +44,9 @@ it(`Should play button be pressed`, () => {
 });
 
 it(`Should pause button be pressed`, () => {
-  const playButtonClickHandler = jest.fn();
-  const pauseButtonClickHandler = jest.fn();
+  const exitButtonClickHandler = jest.fn();
+  const setFullScreen = jest.fn();
+
   const VideoPlayer = withVideo(Player);
 
   const main = mount(
@@ -54,8 +56,8 @@ it(`Should pause button be pressed`, () => {
         poster={movie.poster}
         width={280}
         isPlaying={true}
-        playButtonClickHandler={playButtonClickHandler}
-        pauseButtonClickHandler={pauseButtonClickHandler}
+        exitButtonClickHandler={exitButtonClickHandler}
+        setFullScreen={setFullScreen}
       />
   );
   window.HTMLMediaElement.prototype.pause = () => {};

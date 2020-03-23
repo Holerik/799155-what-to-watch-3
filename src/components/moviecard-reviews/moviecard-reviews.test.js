@@ -109,6 +109,8 @@ it(`<MovieCardReviews /> should render movie card with reviews`, () => {
       movieId={0}
       setMovieCardId={setMovieCardId}
       setPageId={setPageId}
+      playButtonClickHandler = {() => {}}
+      listButtonClickHandler = {() => {}}
     >
     </MovieCardReviews>)
     .toJSON();

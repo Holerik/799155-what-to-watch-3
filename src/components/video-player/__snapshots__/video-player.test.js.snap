@@ -6,6 +6,7 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
 >
   <button
     className="player__exit visually-hidden"
+    onClick={[Function]}
     type="button"
   >
     Exit
@@ -28,7 +29,7 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
           className="player__toggler"
           style={
             Object {
-              "left": "30%",
+              "left": "0%",
             }
           }
         >
@@ -38,7 +39,7 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
       <div
         className="player__time-value"
       >
-        1:30:29
+        1
       </div>
     </div>
     <div
@@ -46,7 +47,6 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
     >
       <button
         className="player__play"
-        disabled={false}
         onClick={[Function]}
         type="button"
       >
@@ -60,7 +60,7 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
           />
         </svg>
         <span>
-          Pause
+          Play
         </span>
       </button>
       <div
@@ -70,6 +70,7 @@ exports[`<VideoPlayer /> should rendered corretly 1`] = `
       </div>
       <button
         className="player__full-screen"
+        onClick={[Function]}
         type="button"
       >
         <svg
