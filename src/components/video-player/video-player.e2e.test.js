@@ -10,15 +10,20 @@ Enzyme.configure({
 
 it(`Should play-pause button be pressed`, () => {
   const buttonPlayerClickHandler = jest.fn();
+  const buttonExitClickHandler = jest.fn();
+  const buttonFullScreenHandler = jest.fn();
 
   const main = mount(
       <Player
         isPlaying={true}
         isPaused={false}
         buttonPlayerClickHandler={buttonPlayerClickHandler}
+        buttonExitClickHandler={buttonExitClickHandler}
+        buttonFullScreenHandler={buttonFullScreenHandler}
         isMuted={true}
         canPlay={true}
         progress={0}
+        duration={`1`}
       >
         <video />
       </Player>

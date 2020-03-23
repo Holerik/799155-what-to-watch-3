@@ -15,9 +15,12 @@ const withMockVideo = (Component) => {
           isPlaying={true}
           isPaused={false}
           buttonPlayerClickHandler={() => {}}
+          buttonExitClickHandler={() => {}}
+          buttonFullScreenHandler={() => {}}
           isMuted={true}
           canPlay={true}
           progress={0}
+          duration={`1`}
         >
           <video />
         </Component>
