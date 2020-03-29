@@ -7,11 +7,17 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import MovieCardFull from '../moviecard-full/moviecard-full.jsx';
 import MovieCardDetails from '../moviecard-details/moviecard-details.jsx';
 import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
-import {ActionCreator} from '../../reducer.js';
+import {ActionCreator as DataCreator} from '../../reducer/data/data.js';
+import {ActionCreator} from '../../reducer/wtw/wtw.js';
+import {Operation as UserOperation} from '../../reducer/user/user.js';
 import {connect} from 'react-redux';
 import withMain from '../../hocs/with-main/with-main.jsx';
 import Player from '../video-player/video-player.jsx';
 import withVideo from '../../hocs/with-video/with-video.jsx';
+import {promoMovie as promoFilm} from '../../mocks/films.js';
+import {getGenre, getFilmsFullInfo, getFilmsByGenre} from '../../reducer/data/selectors.js';
+import {getMovieId, getPageId, getMovie} from '../../reducer/wtw/selectors.js';
+import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
 
 const Main = withMain(MainPage);
 const VideoPlayer = withVideo(Player);
@@ -19,8 +25,6 @@ const VideoPlayer = withVideo(Player);
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this._filmsFullInfo = props.filmsFullInfo;
-    this._promoMovie = props.promoMovie;
     this.playButtonClickHandler = this.playButtonClickHandler.bind(this);
     this.stopMoviePlay = this.stopMoviePlay.bind(this);
   }
@@ -45,9 +49,10 @@ class App extends React.PureComponent {
         poster: this.props.promoMovie.poster,
         altPoster: this.props.promoMovie.altPoster,
         src: this.props.promoMovie.src,
+        preview: this.props.promoMovie.preview,
       });
     } else {
-      const movie = this._filmsFullInfo.find((info) => {
+      const movie = this.props.filmsFullInfo.find((info) => {
         return info.id === this.props.movieId;
       });
       this.props.playMovie({
@@ -56,6 +61,7 @@ class App extends React.PureComponent {
         poster: movie.poster,
         altPoster: movie.altPoster,
         src: movie.src,
+        preview: movie.preview,
       });
     }
   }
@@ -91,9 +97,9 @@ class App extends React.PureComponent {
       return (
         <Main
           filmsInfo={this.props.filmsInfo}
-          filmsFullInfo={this._filmsFullInfo}
+          filmsFullInfo={this.props.filmsFullInfo}
           setMovieId={this.props.setMovieId}
-          promoMovie={this._promoMovie}
+          promoMovie={this.props.promoMovie}
           setPageId={this.props.setPageId}
           setGenre={this.props.setGenre}
           genre={this.props.genre}
@@ -107,7 +113,7 @@ class App extends React.PureComponent {
         return (
           <MovieCardFull
             movieId={this.props.movieId}
-            filmsFullInfo={this._filmsFullInfo}
+            filmsFullInfo={this.props.filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
             playButtonClickHandler={this.playButtonClickHandler}
@@ -118,7 +124,7 @@ class App extends React.PureComponent {
         return (
           <MovieCardDetails
             movieId={this.props.movieId}
-            filmsFullInfo={this._filmsFullInfo}
+            filmsFullInfo={this.props.filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
             playButtonClickHandler={this.playButtonClickHandler}
@@ -129,7 +135,7 @@ class App extends React.PureComponent {
         return (
           <MovieCardReviews
             movieId={this.props.movieId}
-            filmsFullInfo={this._filmsFullInfo}
+            filmsFullInfo={this.props.filmsFullInfo}
             setMovieCardId={this.props.setMovieId}
             setPageId={this.props.setPageId}
             playButtonClickHandler={this.playButtonClickHandler}
@@ -149,17 +155,17 @@ App.propTypes = {
         poster: PropTypes.string.isRequired,
         altPoster: PropTypes.string,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   ),
-  movie: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        poster: PropTypes.string.isRequired,
-        altPoster: PropTypes.string,
-        src: PropTypes.string.isRequired,
-      })
-  ),
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    altPoster: PropTypes.string,
+    src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }),
 };
 
 App.propTypes = {
@@ -185,6 +191,7 @@ App.propTypes = {
         director: PropTypes.string.isRequired,
         starring: PropTypes.arrayOf(PropTypes.string).isRequired,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   ),
   movieId: PropTypes.number.isRequired,
@@ -219,22 +226,24 @@ App.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }),
 };
 
 const mapStateToProps = (state) => ({
-  movieId: state.movieId,
-  pageId: state.pageId,
-  genre: state.genre,
-  filmsInfo: state.filmsInfo,
-  promoMovie: state.promo,
-  movie: state.movie,
+  authorizationStatus: getAuthorizationStatus(state),
+  movieId: getMovieId(state),
+  pageId: getPageId(state),
+  genre: getGenre(state),
+  filmsFullInfo: getFilmsFullInfo(state),
+  filmsInfo: getFilmsByGenre(state),
+  promoMovie: promoFilm, // state.DATA.promo,
+  movie: getMovie(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setGenre(genre) {
-    dispatch(ActionCreator.setCurrentGenre(genre));
-    dispatch(ActionCreator.getFilmsInfo(genre));
+  login(authData) {
+    dispatch(UserOperation.login(authData));
   },
   setMovieId(id) {
     dispatch(ActionCreator.setMovieId(id));
@@ -243,10 +252,16 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setPageId(id));
   },
   setPromoMovie(promo) {
-    dispatch(ActionCreator.setPromoMovie(promo));
+    dispatch(DataCreator.setPromoMovie(promo));
   },
   playMovie(movie) {
     dispatch(ActionCreator.playMovie(movie));
+  },
+  loadMovies(movies) {
+    dispatch(DataCreator.loadMovies(movies));
+  },
+  setGenre(genre) {
+    dispatch(DataCreator.setGenre(genre));
   },
 });
 

@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="Fantomas background"
-        src="img/fantomas-bg.jpg"
+        alt="The Grand Budapest Hotel"
+        src="img/bg-the-grand-budapest-hotel.jpg"
       />
     </div>
     <h1
@@ -71,9 +71,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="Fantomas poster"
+            alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/fantomas-poster.jpg"
+            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -83,7 +83,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Fantomas
+            The Grand Budapest Hotel
           </h2>
           <p
             className="movie-card__meta"
@@ -91,12 +91,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Comedy·Adventure·Crime
+              Adventure·Crime·Comedy
             </span>
             <span
               className="movie-card__year"
             >
-              1964
+              2014
             </span>
           </p>
           <div
@@ -202,15 +202,15 @@ Array [
         >
           <div
             className="small-movie-card__image"
-            id="33"
+            id="2350"
             onClick={[Function]}
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
             <img
-              alt="overboard poster"
+              alt="ittle Women poster"
               height="175"
-              src="img/overboard.jpg"
+              src="img/little-woman-poster.jpg"
               width="280"
             />
           </div>
@@ -222,7 +222,7 @@ Array [
               className="small-movie-card__link"
               href="#"
             >
-              Overboard
+              Little Women
             </a>
           </h3>
         </article>

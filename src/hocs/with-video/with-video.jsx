@@ -57,6 +57,9 @@ const withVideo = (Component) => {
       };
 
       video.ontimeupdate = () => {
+        if (isNaN(video.duration)) {
+          return;
+        }
         this.setState({progress: Math.floor((video.currentTime * 100) / video.duration)});
         const time = formatDuration(video.duration) + `/` +
         formatDuration(video.duration - video.currentTime);
@@ -103,7 +106,8 @@ const withVideo = (Component) => {
           duration={this.state.duration}
         >
           <video className="player__video" ref={this._videoRef}
-            poster={this.props.poster} muted={this.state.isMuted}
+            poster={this.props.poster}
+            muted={this.state.isMuted}
             width={this.props.width}>
             <source src={this.props.src}/>
           </video>

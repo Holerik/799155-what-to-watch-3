@@ -15,6 +15,7 @@ const movie = {
   poster: `img/terminator.jpg`,
   altPoster: `Terminator poster`,
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 it(`Should play button be pressed`, () => {
@@ -41,6 +42,8 @@ it(`Should play button be pressed`, () => {
   main.instance().componentDidMount();
   _videoRef.current.onplay();
   expect(main.state().isPlaying).toEqual(true);
+  _videoRef.current.onpause();
+  main.instance().componentWillUnmount();
 });
 
 it(`Should pause button be pressed`, () => {
@@ -67,4 +70,6 @@ it(`Should pause button be pressed`, () => {
   main.instance().componentDidMount();
   _videoRef.current.onpause();
   expect(main.state().isPaused).toEqual(true);
+  _videoRef.current.onpause();
+  main.instance().componentWillUnmount();
 });

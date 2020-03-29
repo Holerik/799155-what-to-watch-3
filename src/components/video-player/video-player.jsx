@@ -38,9 +38,9 @@ class VideoPlayer extends React.PureComponent {
                 }}
               >
                 <svg
-                  viewBox={isPlaying ? `0 0 19 19` : `0 0 14 21`}
-                  width={isPlaying ? `19` : `14`}
-                  height={isPlaying ? `19` : `21`}
+                  viewBox={isPlaying ? `0 0 19 19` : `0 0 20 20`}
+                  width={isPlaying ? `19` : `20`}
+                  height={isPlaying ? `19` : `20`}
                 >
                   {!isPlaying &&
                     (<use xlinkHref="#play-s"></use>)

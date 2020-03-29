@@ -11,6 +11,7 @@ const filmsInfo = [
     poster: `img/the-man.jpg`,
     altPoster: `the man poster`,
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
@@ -37,6 +38,7 @@ const filmsFullInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
@@ -62,6 +64,7 @@ const promoMovie = {
   director: `André Hunebelle`,
   starring: [`Jean Marais`, `Louis de Funès`, `Mylène Demongeot`, `Jacques Dynam`, `Robert Dalban`],
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 const setMovieCardId = () => {};

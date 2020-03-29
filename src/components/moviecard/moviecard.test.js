@@ -9,6 +9,7 @@ const filmInfo = {
   poster: `img/rampage.jpg`,
   altPoster: `rampage poster`,
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 const movieCardActivateHandler = () => {};

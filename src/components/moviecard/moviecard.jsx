@@ -9,22 +9,19 @@ const VideoPlayer = withVideo(Player);
 const MovieCard = (props) => {
   const {movie, movieCardActivateHandler, movieCardOutHandler,
     movieCardClickHandler, activeMovieId, canPlayVideo} = props;
-  const playButtonClickHandler = () => {};
-  const pauseButtonClickHandler = () => {};
   if (canPlayVideo && movie.id === activeMovieId) {
     return <React.Fragment>
       <article className="small-movie-card catalog__movies-card">
         <div className="small-movie-card__image" onMouseOut={movieCardOutHandler}>
           {
             <VideoPlayer
-              src={movie.src}
+              src={movie.preview}
               isMuted={true}
               poster={movie.poster}
               width={280}
               isPlaying={true}
-              playButtonClickHandler={playButtonClickHandler}
-              pauseButtonClickHandler={pauseButtonClickHandler}
               exitButtonClickHandler={() => {}}
+              setFullScreen={() => {}}
             />
           }
         </div>
@@ -53,6 +50,7 @@ MovieCard.propTypes = {
     poster: PropTypes.string.isRequired,
     altPoster: PropTypes.string,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }),
   movieCardActivateHandler: PropTypes.func.isRequired,
   movieCardClickHandler: PropTypes.func.isRequired,

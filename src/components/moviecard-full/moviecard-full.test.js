@@ -26,6 +26,7 @@ const detailedFilmInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 2,
@@ -49,6 +50,7 @@ const detailedFilmInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 3,
@@ -72,6 +74,7 @@ const detailedFilmInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 4,
@@ -95,6 +98,7 @@ const detailedFilmInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
 ];
 

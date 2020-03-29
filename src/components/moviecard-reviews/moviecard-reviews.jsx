@@ -160,6 +160,7 @@ MovieCardReviews.propTypes = {
         director: PropTypes.string.isRequired,
         starring: PropTypes.arrayOf(PropTypes.string).isRequired,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   ),
   children: PropTypes.oneOfType([

@@ -50,6 +50,7 @@ const withActiveItem = (Component) => {
             poster: PropTypes.string.isRequired,
             altPoster: PropTypes.string,
             src: PropTypes.string.isRequired,
+            preview: PropTypes.string.isRequired,
           })
       )]).isRequired,
   };

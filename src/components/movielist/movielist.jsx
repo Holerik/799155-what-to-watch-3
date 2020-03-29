@@ -9,18 +9,22 @@ const TIME_INTERVAL = 1000; // ms
 class MovieList extends React.PureComponent {
   constructor(props) {
     super(props);
-    // this._setMovieCardId = props.setMovieCardId;
     this._movieCardActivateHandler = this._movieCardActivateHandler.bind(this);
     this._movieCardClickHandler = this._movieCardClickHandler.bind(this);
     this._movieCardOutHandler = this._movieCardOutHandler.bind(this);
     this.state = {
-      // activeItem: -1,
       showIsDetailed: true,
       canPlayVideo: false,
     };
     this._movieCardFirstOnPage = 0;
     this._movieCardLastOnPage = this._movieCardFirstOnPage + MOVIE_CARDS_ON_PAGE;
     this._lastTimeOut = null;
+  }
+
+  componentWillUnmount() {
+    if (this._lastTimeOut) {
+      clearTimeout(this._lastTimeOut);
+    }
   }
 
   _waitTimeInterval() {
@@ -47,7 +51,6 @@ class MovieList extends React.PureComponent {
     const filmCard = this._getActiveFilmCard(evt);
     const id = filmCard === undefined ? -1 : filmCard.id;
     this.props.setActiveItem(id);
-    // this.setState({activeItem: id});
     if (this._lastTimeOut) {
       clearTimeout(this._lastTimeOut);
     }
@@ -58,7 +61,6 @@ class MovieList extends React.PureComponent {
 
   _movieCardOutHandler() {
     this.props.setActiveItem(-1);
-    // this.setState({activeItem: -1});
     this.setState({canPlayVideo: false});
     clearTimeout(this._lastTimeOut);
     this._lastTimeOut = null;
@@ -68,7 +70,6 @@ class MovieList extends React.PureComponent {
     evt.preventDefault();
     const filmCard = this._getClickedFilmCard(evt);
     if (filmCard !== undefined) {
-      // this._setMovieCardId(filmCard.id);
       this.props.setActiveItem(filmCard.id);
     }
     this.props.mouseClickHandler();
@@ -104,6 +105,7 @@ MovieList.propTypes = {
         poster: PropTypes.string.isRequired,
         altPoster: PropTypes.string,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   ),
   stateItem: PropTypes.number.isRequired,

@@ -2,25 +2,34 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/app/app.jsx';
-import {ALL_GENRES, reducer, selectMoviesByGenre} from './reducer.js';
-import {createStore} from 'redux';
+import reducer from './reducer.js';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';
+import {createAPI} from './api.js';
+import {Operation as UserOperation, AuthorizationStatus, ActionCreator} from './reducer/user/user.js';
+import {Operation as DataOperation} from './reducer/data/data.js';
 
-const store = createStore(reducer);
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
+const api = createAPI(onUnauthorized);
+
+const store = createStore(
+    reducer,
+    compose(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
+);
+
+store.dispatch(DataOperation.loadMovies());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDom.render(
     <Provider store={store}>
       <App
-        filmsInfo={selectMoviesByGenre(ALL_GENRES)}
-        filmsFullInfo={selectMoviesByGenre()}
-        promoMovie={{}}
-        setMovieId={() => {}}
-        setPageId={() => {}}
-        movieId={-1}
-        pageId={0}
-        setGenre={() => {}}
-        setPromoMovie={() => {}}
-        playMovie={() => {}}
       />
     </Provider>,
     document.querySelector(`#root`)
