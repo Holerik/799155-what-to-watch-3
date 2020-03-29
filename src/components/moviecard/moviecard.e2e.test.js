@@ -10,6 +10,7 @@ const filmInfo = {
   poster: `img/hostiles.jpg`,
   altPoster: `Hostiles poster`,
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 

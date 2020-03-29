@@ -61,6 +61,7 @@ const withMain = (Component) => {
           poster: PropTypes.string.isRequired,
           altPoster: PropTypes.string,
           src: PropTypes.string.isRequired,
+          preview: PropTypes.string.isRequired
         })
     ),
     setMovieId: PropTypes.func.isRequired,
@@ -92,6 +93,7 @@ const withMain = (Component) => {
           director: PropTypes.string.isRequired,
           starring: PropTypes.arrayOf(PropTypes.string).isRequired,
           src: PropTypes.string.isRequired,
+          preview: PropTypes.string.isRequired,
         })
     )
   };
@@ -119,6 +121,7 @@ const withMain = (Component) => {
       director: PropTypes.string.isRequired,
       starring: PropTypes.arrayOf(PropTypes.string).isRequired,
       src: PropTypes.string.isRequired,
+      preview: PropTypes.string.isRequired
     }),
   };
 

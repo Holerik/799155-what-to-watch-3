@@ -321,4 +321,5 @@ export const promoMovie = {
   director: `Wes Anderson`,
   starring: [`Ralph Fiennes`, `F. Murray Abraham`, `Mathieu Amalric`, `Adrien Brody`, `SWillem Dafoe`, `Jeff Goldblum`, `	Harvey Keitel`, `Jude Law`, `Bill Murray`],
   src: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
 };

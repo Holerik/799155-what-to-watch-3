@@ -5,7 +5,7 @@ import Movies from '../movielist/movielist.jsx';
 import Header from '../header/header.jsx';
 import Footer from '../footer/footer.jsx';
 import Tabs from '../genre-tabs/genre-tabs.jsx';
-import {ALL_GENRES} from '../../reducer.js';
+import {ALL_GENRES} from '../../reducer/data/data.js';
 import ShowMore from '../show-more/show-more.jsx';
 import withShowMore from '../../hocs/with-show-more/with-show-more.jsx';
 import withTabs from '../../hocs/with-tabs/with-tabs.jsx';
@@ -28,12 +28,6 @@ class Main extends React.PureComponent {
   constructor(props) {
     super(props);
     this.genres = [ALL_GENRES];
-    for (let movie of this.props.filmsFullInfo) {
-      this.genres = this.genres.concat(movie.genre.filter((item) => {
-        return this.genres.indexOf(item) === -1;
-      }));
-    }
-    this.genres = this.genres.slice(0, MAX_GENRES_COUNT);
     this._genreTabsClickHandler = this._genreTabsClickHandler.bind(this);
   }
 
@@ -41,8 +35,16 @@ class Main extends React.PureComponent {
     const genre = this.genres[id];
     this.props.setGenre(genre);
   }
+
   render() {
     const activeItem = this.genres.indexOf(this.props.genre);
+    this.genres = [ALL_GENRES];
+    for (let movie of this.props.filmsFullInfo) {
+      this.genres = this.genres.concat(movie.genre.filter((item) => {
+        return this.genres.indexOf(item) === -1;
+      }));
+    }
+    this.genres = this.genres.slice(0, MAX_GENRES_COUNT);
 
     return <React.Fragment>
       <section className="movie-card">
@@ -135,6 +137,7 @@ Main.propTypes = {
         poster: PropTypes.string.isRequired,
         altPoster: PropTypes.string,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   ),
   setMovieId: PropTypes.func.isRequired,
@@ -169,6 +172,7 @@ Main.propTypes = {
         director: PropTypes.string.isRequired,
         starring: PropTypes.arrayOf(PropTypes.string).isRequired,
         src: PropTypes.string.isRequired,
+        preview: PropTypes.string.isRequired,
       })
   )
 };
@@ -196,6 +200,7 @@ Main.propTypes = {
     director: PropTypes.string.isRequired,
     starring: PropTypes.arrayOf(PropTypes.string).isRequired,
     src: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }),
 };
 

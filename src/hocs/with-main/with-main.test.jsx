@@ -14,6 +14,7 @@ const filmsInfo = [
     poster: `img/with-unsane.jpg`,
     altPoster: `whis-unsane poster`,
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   },
   {
     id: 255,
@@ -21,6 +22,7 @@ const filmsInfo = [
     poster: `img/second-with-unsane.jpg`,
     altPoster: `whis-second-unsane poster`,
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
@@ -47,6 +49,7 @@ const filmsFullInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
@@ -72,6 +75,7 @@ const promoMovie = {
   director: `André Hunebelle`,
   starring: [`Jean Marais`, `Louis de Funès`, `Mylène Demongeot`, `Jacques Dynam`, `Robert Dalban`],
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 const setMovieCardId = () => {};

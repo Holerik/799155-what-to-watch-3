@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 import App from './app.jsx';
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
 
 const mockStore = configureStore([]);
 
@@ -14,10 +15,11 @@ const filmsShortInfo = [
     poster: `img/overboard.jpg`,
     altPoster: `overboard poster`,
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
   }
 ];
 
-const filmsFullInfo = [
+const moviesFullInfo = [
   {
     id: 2350,
     title: `Little Women`,
@@ -40,7 +42,8 @@ const filmsFullInfo = [
     director: `Greta Gerwig`,
     starring: [`Saoirse Ronan`, `Emma Watson`, `Florence Pugh`, `Meryl Streep`, `Timothee Chalamet`],
     src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
-  }
+    preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  },
 ];
 
 const promoMovie = {
@@ -65,6 +68,7 @@ const promoMovie = {
   director: `André Hunebelle`,
   starring: [`Jean Marais`, `Louis de Funès`, `Mylène Demongeot`, `Jacques Dynam`, `Robert Dalban`],
   src: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
+  preview: `https://media.w3.org/2010/05/sintel/trailer.mp4`,
 };
 
 const setPageId = () => {};
@@ -74,17 +78,26 @@ const setPromoMovie = () => {};
 
 it(`<App /> should render Fantomas film card`, () => {
   const store = mockStore({
-    promo: promoMovie,
-    filmsInfo: filmsShortInfo,
-    pageId: 0,
-    movieId: -1,
-    genre: `All genres`,
+    USER: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+    },
+    DATA: {
+      promo: promoMovie,
+      filmsInfo: filmsShortInfo,
+      filmsFullInfo: moviesFullInfo,
+      genre: `All genres`,
+    },
+    MOVIE: {
+      pageId: 0,
+      movieId: -1,
+    },
   });
   const tree = renderer
     .create(<Provider store={store}>
       <App
+        authorizationStatus={AuthorizationStatus.NO_AUTH}
         filmsInfo={filmsShortInfo}
-        filmsFullInfo={filmsFullInfo}
+        filmsFullInfo={moviesFullInfo}
         promoMovie={promoMovie}
         setMovieId={setMovieId}
         setPageId={setPageId}
