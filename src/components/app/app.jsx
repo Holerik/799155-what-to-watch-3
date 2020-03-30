@@ -9,7 +9,7 @@ import MovieCardDetails from '../moviecard-details/moviecard-details.jsx';
 import MovieCardReviews from '../moviecard-reviews/moviecard-reviews.jsx';
 import {ActionCreator as DataCreator} from '../../reducer/data/data.js';
 import {ActionCreator} from '../../reducer/wtw/wtw.js';
-import {Operation as UserOperation} from '../../reducer/user/user.js';
+import {Operation as UserOperation, AuthorizationStatus} from '../../reducer/user/user.js';
 import {connect} from 'react-redux';
 import withMain from '../../hocs/with-main/with-main.jsx';
 import Player from '../video-player/video-player.jsx';
@@ -18,6 +18,7 @@ import {promoMovie as promoFilm} from '../../mocks/films.js';
 import {getGenre, getFilmsFullInfo, getFilmsByGenre} from '../../reducer/data/selectors.js';
 import {getMovieId, getPageId, getMovie} from '../../reducer/wtw/selectors.js';
 import {getAuthorizationStatus} from '../../reducer/user/selectors.js';
+import SignIn from '../sign-in/sign-in.jsx';
 
 const Main = withMain(MainPage);
 const VideoPlayer = withVideo(Player);
@@ -27,6 +28,11 @@ class App extends React.PureComponent {
     super(props);
     this.playButtonClickHandler = this.playButtonClickHandler.bind(this);
     this.stopMoviePlay = this.stopMoviePlay.bind(this);
+    this.onSignInHandler = this.onSignInHandler.bind(this);
+  }
+
+  onSignInHandler(data) {
+    this.props.login(data);
   }
 
   render() {
@@ -35,6 +41,14 @@ class App extends React.PureComponent {
         <Switch>
           <Route exact path='/'>
             {this._renderApp()}
+          </Route>
+          <Route exact path='/signin'>
+            <SignIn
+              onSubmit={this.onSignInHandler}
+              setMovieId={this.props.setMovieId}
+              setPageId={this.props.setPageId}
+              authorizationStatus={this.props.authorizationStatus}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -105,6 +119,7 @@ class App extends React.PureComponent {
           genre={this.props.genre}
           playButtonClickHandler={this.playButtonClickHandler}
           listButtonClickHandler={() => {}}
+          authorizationStatus={this.props.authorizationStatus}
         />
       );
     }
@@ -201,6 +216,7 @@ App.propTypes = {
   setMovieId: PropTypes.func.isRequired,
   setGenre: PropTypes.func.isRequired,
   playMovie: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 App.propTypes = {
@@ -228,6 +244,10 @@ App.propTypes = {
     src: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
+  authorizationStatus: PropTypes.oneOf([
+    AuthorizationStatus.AUTH,
+    AuthorizationStatus.NO_AUTH
+  ]),
 };
 
 const mapStateToProps = (state) => ({

@@ -50,14 +50,18 @@ Array [
         className="user-block"
       >
         <div
-          className="user-block__avatar"
+          className="user-block__link"
         >
-          <img
-            alt="User avatar"
-            height="63"
-            src="img/avatar.jpg"
-            width="63"
-          />
+          <a
+            className="logo__link"
+            href="/signin"
+          >
+            <span
+              className="logo__letter"
+            >
+              Sign In
+            </span>
+          </a>
         </div>
       </div>
     </header>

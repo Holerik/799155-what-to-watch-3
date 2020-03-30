@@ -1,6 +1,7 @@
 // header.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
 
 const Header = (props) => {
   const {avatar} = props;
@@ -18,14 +19,28 @@ const Header = (props) => {
     </div>
 
     <div className="user-block">
+      { props.authorizationStatus === AuthorizationStatus.AUTH &&
       <div className="user-block__avatar">
         <img src={avatar} alt="User avatar" width="63" height="63" />
       </div>
+      }
+      {
+        props.authorizationStatus === AuthorizationStatus.NO_AUTH &&
+        <div className="user-block__link">
+          <a href="/signin" className="logo__link">
+            <span className="logo__letter">Sign In</span>
+          </a>
+        </div>
+      }
     </div>
   </React.Fragment>;
 };
 
 Header.propTypes = {
+  authorizationStatus: PropTypes.oneOf([
+    AuthorizationStatus.AUTH,
+    AuthorizationStatus.NO_AUTH
+  ]),
   avatar: PropTypes.string.isRequired,
   setPageId: PropTypes.func.isRequired,
   setMovieId: PropTypes.func.isRequired,

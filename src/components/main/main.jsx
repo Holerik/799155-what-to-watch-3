@@ -10,6 +10,7 @@ import ShowMore from '../show-more/show-more.jsx';
 import withShowMore from '../../hocs/with-show-more/with-show-more.jsx';
 import withTabs from '../../hocs/with-tabs/with-tabs.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item.jsx';
+import {AuthorizationStatus} from '../../reducer/user/user.js';
 
 const MAX_GENRES_COUNT = 10;
 const GenreTabs = withActiveItem(withTabs(Tabs));
@@ -59,6 +60,7 @@ class Main extends React.PureComponent {
             avatar={`img/avatar.jpg`}
             setMovieId={this.props.setMovieId}
             setPageId={this.props.setPageId}
+            authorizationStatus={this.props.authorizationStatus}
           />
         </header>
 
@@ -202,6 +204,10 @@ Main.propTypes = {
     src: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
+  authorizationStatus: PropTypes.oneOf([
+    AuthorizationStatus.AUTH,
+    AuthorizationStatus.NO_AUTH
+  ]),
 };
 
 export default Main;

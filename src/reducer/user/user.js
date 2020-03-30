@@ -34,21 +34,30 @@ const reducer = (state = initilalState, action) => {
   return state;
 };
 
+const checkStatus = (response) => {
+  const status = response.status;
+  if (status >= 200 && status < 300) {
+    return response;
+  } else {
+    throw new Error(`${response.status}: ${response.statusText}`);
+  }
+};
+
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch(errorHandle);
+      });
   },
 
   login: (authData) => (dispatch, getState, api) => {
     return api.post(`/login`, {
-      email: authData.login,
+      email: authData.email,
       password: authData.password,
     })
-      .then(() => {
+      .then((status) => {
+        checkStatus(status);
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       })
       .catch(errorHandle);
